@@ -1,4 +1,8 @@
 const fontSelect = document.getElementById('fontSelect');
+const fontSearch = document.getElementById('fontSearch');
+const fontResults = document.getElementById('fontResults');
+
+let allFonts = [];
 
 // Function to inject font stylesheet and custom CSS rule
 function applyFont(selectedFont) {
@@ -44,4 +48,50 @@ function applyFont(selectedFont) {
 // Automatically trigger on dropdown selection change
 fontSelect.addEventListener('change', (e) => {
     applyFont(e.target.value);
+});
+
+// Load the full Google Fonts catalog for search
+fetch('fonts.json')
+    .then((res) => res.json())
+    .then((fonts) => {
+        allFonts = fonts;
+        renderResults('');
+    })
+    .catch(() => {
+        fontResults.innerHTML = '<li class="empty">Couldn\'t load font list</li>';
+    });
+
+function renderResults(query) {
+    fontResults.innerHTML = '';
+
+    if (!query) {
+        const hint = document.createElement('li');
+        hint.className = 'hint';
+        hint.textContent = 'Type to search 1900+ fonts';
+        fontResults.appendChild(hint);
+        return;
+    }
+
+    const matches = allFonts
+        .filter((font) => font.toLowerCase().includes(query.toLowerCase()))
+        .slice(0, 50);
+
+    if (matches.length === 0) {
+        const empty = document.createElement('li');
+        empty.className = 'empty';
+        empty.textContent = 'No fonts found';
+        fontResults.appendChild(empty);
+        return;
+    }
+
+    matches.forEach((font) => {
+        const item = document.createElement('li');
+        item.textContent = font;
+        item.addEventListener('click', () => applyFont(font));
+        fontResults.appendChild(item);
+    });
+}
+
+fontSearch.addEventListener('input', (e) => {
+    renderResults(e.target.value.trim());
 });
