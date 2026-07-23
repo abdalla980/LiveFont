@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Quick Font Swapper",
+  "version": "1.0",
+  "description": "Preview your website with different Google fonts live in your browser.",
+  "permissions": ["activeTab", "scripting"],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
