@@ -1,0 +1,116 @@
+---
+const { title, description } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="icon" href="/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #18181b;
+      --muted: #71717a;
+      --border: #e4e4e7;
+      --accent-a: #8b5cf6;
+      --accent-b: #4f46e5;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    a { color: inherit; }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    header.site {
+      border-bottom: 1px solid var(--border);
+    }
+    header.site .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 72px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 22%;
+    }
+    .brand span {
+      font-weight: 700;
+      font-size: 17px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    footer.site {
+      border-top: 1px solid var(--border);
+      margin-top: 80px;
+    }
+    footer.site .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer.site nav {
+      display: flex;
+      gap: 20px;
+    }
+    footer.site a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    footer.site a:hover {
+      color: var(--ink);
+    }
+    footer.site .copy {
+      color: var(--muted);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site">
+    <div class="wrap">
+      <a class="brand" href="/">
+        <img src="/icon.png" alt="LiveFonty" />
+        <span>LiveFonty</span>
+      </a>
+    </div>
+  </header>
+
+  <slot />
+
+  <footer class="site">
+    <div class="wrap">
+      <span class="copy">&copy; 2026 LiveFonty</span>
+      <nav>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="mailto:abdullahizzldin1@gmail.com">Contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

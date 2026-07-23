@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const features = [
+  {
+    emoji: '🔎',
+    title: 'Search All Fonts',
+    body: 'Type to filter the entire Google Fonts catalog, 1,900+ families, and apply any of them to the page you’re viewing in one click.',
+  },
+  {
+    emoji: '🎨',
+    title: 'Brand Vibe Picker',
+    body: 'Pick a personality — Modern & Minimal, Bold & Edgy, Elegant & Luxury, and more — and get a curated shortlist of fonts that fit it.',
+  },
+  {
+    emoji: '📈',
+    title: 'Top 10, Real Data',
+    body: 'A quick-pick list of the 10 most popular fonts, ranked straight from Google Fonts’ own popularity data.',
+  },
+];
+---
+<Layout title="LiveFonty — Live-preview Google Fonts on any website" description="Instantly preview any Google Font on the page you're viewing. Search 1,900+ fonts, browse by brand vibe, or pick from a real-data Top 10.">
+  <main class="wrap">
+    <section class="hero">
+      <div class="pill">Chrome Extension</div>
+      <h1>See your site in a different font before you commit to it.</h1>
+      <p class="lead">
+        LiveFonty previews any Google Font on the webpage you're currently viewing &mdash;
+        instantly, with no code changes. Search the full catalog, browse by brand vibe,
+        or grab one of the real-data Top 10.
+      </p>
+      <div class="cta-row">
+        <span class="cta-soon">Coming soon to the Chrome Web Store</span>
+      </div>
+    </section>
+
+    <section class="cards">
+      {features.map((f) => (
+        <div class="card">
+          <div class="card-icon">{f.emoji}</div>
+          <h3>{f.title}</h3>
+          <p>{f.body}</p>
+        </div>
+      ))}
+    </section>
+  </main>
+
+  <style>
+    .hero {
+      padding: 72px 0 48px;
+      text-align: center;
+    }
+    .pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #8b5cf6, #4f46e5);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 40px;
+      line-height: 1.2;
+      margin: 0 0 20px;
+      letter-spacing: -0.01em;
+      max-width: 680px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .lead {
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .cta-row {
+      margin-top: 32px;
+    }
+    .cta-soon {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 24px 0 80px;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px 24px;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .card-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+    .card h3 {
+      font-size: 17px;
+      margin: 0 0 8px;
+      letter-spacing: -0.01em;
+    }
+    .card p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: var(--muted);
+      margin: 0;
+    }
+    @media (max-width: 720px) {
+      h1 { font-size: 30px; }
+      .cards { grid-template-columns: 1fr; }
+    }
+  </style>
+</Layout>

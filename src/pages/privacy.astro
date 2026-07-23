@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Privacy Policy — LiveFonty" description="LiveFonty's privacy policy: the extension does not collect, store, or transmit any user data.">
+  <main class="wrap">
+    <article class="doc">
+      <h1>Privacy Policy</h1>
+      <p class="updated">Last updated: July 23, 2026</p>
+
+      <p>
+        LiveFonty is a browser extension that lets you preview Google Fonts on the
+        webpage you're currently viewing.
+      </p>
+
+      <h2>Data collection</h2>
+      <p>
+        LiveFonty does not collect, store, or transmit any personal data, browsing
+        history, or webpage content. It does not use analytics, tracking, or any
+        third-party data services.
+      </p>
+
+      <h2>How it works</h2>
+      <p>
+        When you select a font in the extension's popup, LiveFonty temporarily applies
+        that font to the page you're currently viewing by loading the font's stylesheet
+        directly from Google Fonts and adjusting that page's styling in your browser.
+        This happens entirely on your device &mdash; nothing is sent to us.
+      </p>
+
+      <h2>Permissions</h2>
+      <p>
+        LiveFonty requests the <code>activeTab</code> and <code>scripting</code>
+        permissions solely to apply your selected font to the tab you're actively
+        viewing, only when you interact with the extension. It does not run in the
+        background and cannot access any other tabs.
+      </p>
+
+      <h2>Third-party services</h2>
+      <p>
+        Font stylesheets and font files are loaded directly from Google Fonts
+        (fonts.googleapis.com / fonts.gstatic.com), subject to
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's own privacy policy</a>.
+      </p>
+
+      <h2>Contact</h2>
+      <p>
+        Questions about this policy? Email
+        <a href="mailto:abdullahizzldin1@gmail.com">abdullahizzldin1@gmail.com</a>.
+      </p>
+
+      <p><a href="/">&larr; Back to home</a></p>
+    </article>
+  </main>
+
+  <style>
+    .doc {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 56px 0 80px;
+    }
+    h1 {
+      font-size: 32px;
+      margin: 0 0 8px;
+      letter-spacing: -0.01em;
+    }
+    .updated {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 32px;
+    }
+    h2 {
+      font-size: 18px;
+      margin: 32px 0 10px;
+    }
+    p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #3f3f46;
+    }
+    code {
+      background: #f4f4f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    a { color: var(--accent-b); }
+  </style>
+</Layout>
