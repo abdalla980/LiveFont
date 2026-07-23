@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Quick Font Swapper",
+  "name": "LiveFonty",
   "version": "1.0",
-  "description": "Preview your website with different Google fonts live in your browser.",
+  "description": "Live preview curated Google Fonts on any website instantly.",
   "permissions": ["activeTab", "scripting"],
   "action": {
     "default_popup": "popup.html"
