@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
+const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpnhdmdncdenhj?utm_source=item-share-cb';
+
 const features = [
   {
     emoji: '🔎',
@@ -30,7 +32,7 @@ const features = [
         or grab one of the real-data Top 10.
       </p>
       <div class="cta-row">
-        <span class="cta-soon">Coming soon to the Chrome Web Store</span>
+        <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
       </div>
     </section>
 
@@ -43,6 +45,12 @@ const features = [
         </div>
       ))}
     </section>
+
+    <section class="cta-bottom">
+      <h2>See it on your own site.</h2>
+      <p>Free, instant, no code changes.</p>
+      <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+    </section>
   </main>
 
   <style>
@@ -54,7 +62,7 @@ const features = [
       display: inline-block;
       padding: 6px 14px;
       border-radius: 999px;
-      background: linear-gradient(135deg, #8b5cf6, #4f46e5);
+      background: var(--ink);
       color: #fff;
       font-size: 12px;
       font-weight: 600;
@@ -62,10 +70,11 @@ const features = [
       margin-bottom: 20px;
     }
     h1 {
+      font-weight: 800;
       font-size: 40px;
       line-height: 1.2;
       margin: 0 0 20px;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
       max-width: 680px;
       margin-left: auto;
       margin-right: auto;
@@ -80,14 +89,19 @@ const features = [
     .cta-row {
       margin-top: 32px;
     }
-    .cta-soon {
+    .cta-primary {
       display: inline-block;
-      padding: 10px 18px;
+      padding: 12px 24px;
       border-radius: 8px;
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 500;
+      background: var(--ink);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.15s ease;
+    }
+    .cta-primary:hover {
+      opacity: 0.85;
     }
     .cards {
       display: grid;
@@ -116,6 +130,22 @@ const features = [
       line-height: 1.6;
       color: var(--muted);
       margin: 0;
+    }
+    .cta-bottom {
+      text-align: center;
+      padding: 56px 0 88px;
+      border-top: 1px solid var(--border);
+    }
+    .cta-bottom h2 {
+      font-weight: 800;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .cta-bottom p {
+      color: var(--muted);
+      font-size: 15px;
+      margin: 0 0 28px;
     }
     @media (max-width: 720px) {
       h1 { font-size: 30px; }

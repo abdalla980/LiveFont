@@ -11,14 +11,12 @@ const { title, description } = Astro.props;
   <link rel="icon" href="/icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ink: #18181b;
-      --muted: #71717a;
+      --ink: #0a0a0a;
+      --muted: #52525b;
       --border: #e4e4e7;
-      --accent-a: #8b5cf6;
-      --accent-b: #4f46e5;
     }
     * { box-sizing: border-box; }
     html, body {
@@ -46,19 +44,12 @@ const { title, description } = Astro.props;
     .brand {
       display: flex;
       align-items: center;
-      gap: 10px;
       text-decoration: none;
     }
     .brand img {
-      width: 32px;
-      height: 32px;
-      border-radius: 22%;
-    }
-    .brand span {
-      font-weight: 700;
-      font-size: 17px;
-      letter-spacing: -0.01em;
-      color: var(--ink);
+      height: 26px;
+      width: auto;
+      display: block;
     }
     footer.site {
       border-top: 1px solid var(--border);
@@ -90,13 +81,17 @@ const { title, description } = Astro.props;
       font-size: 13px;
     }
   </style>
+  <style is:global>
+    h1, h2, h3 {
+      font-family: 'Manrope', 'Inter', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+  </style>
 </head>
 <body>
   <header class="site">
     <div class="wrap">
       <a class="brand" href="/">
-        <img src="/icon.png" alt="LiveFonty" />
-        <span>LiveFonty</span>
+        <img src="/logo.png" alt="LiveFonty" />
       </a>
     </div>
   </header>
