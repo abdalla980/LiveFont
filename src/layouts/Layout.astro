@@ -12,25 +12,17 @@ const { title, description } = Astro.props;
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script is:inline>document.documentElement.classList.add('js-enabled');</script>
   <style>
     :root {
       --ink: #0a0a0a;
       --muted: #52525b;
       --border: #e4e4e7;
-    }
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #ffffff;
-      color: var(--ink);
-      font-family: 'Inter', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    }
-    a { color: inherit; }
-    .wrap {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 24px;
+      --red: #7e0c0c;
+      --red-bright: #e5484d;
+      --night-text: #fafafa;
+      --night-muted: #a1a1aa;
+      --night-border: #262626;
     }
     header.site {
       border-bottom: 1px solid var(--border);
@@ -40,6 +32,7 @@ const { title, description } = Astro.props;
       align-items: center;
       justify-content: space-between;
       height: 72px;
+      gap: 24px;
     }
     .brand {
       display: flex;
@@ -51,9 +44,41 @@ const { title, description } = Astro.props;
       width: auto;
       display: block;
     }
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .site-nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .site-nav a:hover {
+      color: var(--ink);
+    }
+    .site-nav .nav-cta {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      font-weight: 600;
+      transition: opacity 0.15s ease;
+    }
+    .site-nav .nav-cta:hover {
+      opacity: 0.85;
+      color: #fff;
+    }
+    @media (max-width: 640px) {
+      .site-nav a:not(.nav-cta) {
+        display: none;
+      }
+    }
     footer.site {
       border-top: 1px solid var(--border);
-      margin-top: 80px;
+      margin-top: 0;
     }
     footer.site .wrap {
       display: flex;
@@ -82,8 +107,42 @@ const { title, description } = Astro.props;
     }
   </style>
   <style is:global>
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #ffffff;
+      color: var(--ink);
+      font-family: 'Inter', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
     h1, h2, h3 {
       font-family: 'Manrope', 'Inter', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    a {
+      color: inherit;
+    }
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .js-enabled .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .js-enabled .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
     }
   </style>
 </head>
@@ -93,6 +152,12 @@ const { title, description } = Astro.props;
       <a class="brand" href="/">
         <img src="/logo.png" alt="LiveFonty" />
       </a>
+      <nav class="site-nav">
+        <a href="/#features">Features</a>
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#faq">FAQ</a>
+        <a class="nav-cta" href="/#download">Download</a>
+      </nav>
     </div>
   </header>
 
@@ -107,5 +172,26 @@ const { title, description } = Astro.props;
       </nav>
     </div>
   </footer>
+
+  <script>
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealEls = document.querySelectorAll('.reveal');
+    if (!prefersReduced && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          }
+        },
+        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
+      );
+      revealEls.forEach((el) => observer.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('is-visible'));
+    }
+  </script>
 </body>
 </html>
