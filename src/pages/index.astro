@@ -2,6 +2,38 @@
 import Layout from '../layouts/Layout.astro';
 
 const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpnhdmdncdenhj?utm_source=item-share-cb';
+const reviewUrl = 'https://chromewebstore.google.com/detail/livefonty/ahdfmlobklcldcjfapjpnhdmdncdenhj/reviews?utm_source=item-share-cb';
+const githubUrl = 'https://github.com/abdalla980/LiveFonty';
+
+const supportActions = [
+  {
+    title: 'Download',
+    body: 'Install LiveFonty free from the Chrome Web Store and try fonts on any page.',
+    href: storeUrl,
+    label: 'Download for Chrome',
+    ga: 'download',
+    place: 'support',
+    primary: true,
+  },
+  {
+    title: 'Leave a review',
+    body: 'Already using it? A short Chrome Web Store review helps others decide.',
+    href: reviewUrl,
+    label: 'Write a review',
+    ga: 'review',
+    place: 'support',
+    primary: false,
+  },
+  {
+    title: 'Star on GitHub',
+    body: 'If you like the project, a star makes it easier for more people to find.',
+    href: githubUrl,
+    label: 'Star on GitHub',
+    ga: 'github_star',
+    place: 'support',
+    primary: false,
+  },
+];
 
 const features = [
   {
@@ -240,22 +272,28 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       </div>
     </section>
 
-    <section id="github" class="section github" data-animate>
+    <section id="support" class="section support" data-animate>
       <div class="wrap">
-        <div class="github-panel glass-card" data-animate-child>
-          <p class="eyebrow">GitHub</p>
-          <h2>Liked LiveFonty? Give it a star on GitHub.</h2>
-          <p class="lead center">Stars help more people find the project — and they mean a lot.</p>
-          <a
-            class="cta-github"
-            href="https://github.com/abdalla980/LiveFonty"
-            target="_blank"
-            rel="noopener"
-            data-ga="github_star"
-            data-ga-place="section"
-          >
-            Star on GitHub
-          </a>
+        <p class="eyebrow">Next steps</p>
+        <h2>Three ways to help LiveFonty grow.</h2>
+        <p class="lead center">One primary action — install it. Reviews and stars help the rest.</p>
+        <div class="support-grid">
+          {supportActions.map((a) => (
+            <article class="glass-card support-card" data-animate-child>
+              <h3>{a.title}</h3>
+              <p>{a.body}</p>
+              <a
+                class={a.primary ? 'cta-primary' : 'cta-secondary'}
+                href={a.href}
+                target="_blank"
+                rel="noopener"
+                data-ga={a.ga}
+                data-ga-place={a.place}
+              >
+                {a.label}
+              </a>
+            </article>
+          ))}
         </div>
       </div>
     </section>
@@ -861,63 +899,79 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       color: var(--ink-soft);
     }
 
-    .github {
+    .support {
       text-align: center;
       padding-bottom: 110px;
     }
 
-    .github .eyebrow {
+    .support .eyebrow {
       text-align: center;
     }
 
-    .github h2 {
+    .support h2 {
       margin-left: auto;
       margin-right: auto;
       text-align: center;
       max-width: 520px;
     }
 
-    .github-panel {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 40px 32px;
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      text-align: left;
+      margin-top: 8px;
     }
 
-    .cta-github {
+    .support-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+      padding: 28px 24px;
+    }
+
+    .support-card h3 {
+      margin: 0 0 10px;
+    }
+
+    .support-card p {
+      flex: 1;
+      margin: 0 0 20px;
+    }
+
+    .support-card .cta-primary,
+    .support-card .cta-secondary {
+      align-self: flex-start;
+      width: auto;
+    }
+
+    .cta-secondary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      margin-top: 8px;
-      padding: 14px 28px;
+      padding: 12px 22px;
       border-radius: 999px;
-      background: var(--ink);
-      color: #f5f6f8;
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--font);
       font-size: 14px;
       font-weight: 500;
       text-decoration: none;
-      box-shadow: 0 10px 28px rgba(42, 47, 58, 0.18);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
-    .cta-github:hover {
+    .cta-secondary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 14px 34px rgba(42, 47, 58, 0.24);
-    }
-
-    .cta-github::before {
-      content: '';
-      width: 16px;
-      height: 16px;
-      background: currentColor;
-      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M8 .2a8 8 0 0 0-2.5 15.6c.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1-2.7-1-.3-.9-.9-1.1-.9-1.1-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.5 7.5 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.7 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2z'/%3E%3C/svg%3E") center / contain no-repeat;
-      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='black' d='M8 .2a8 8 0 0 0-2.5 15.6c.4.1.5-.2.5-.4v-1.4c-2.2.5-2.7-1-2.7-1-.3-.9-.9-1.1-.9-1.1-.7-.5.1-.5.1-.5.8.1 1.2.8 1.2.8.7 1.2 1.9.9 2.3.7.1-.5.3-.9.5-1.1-1.8-.2-3.6-.9-3.6-4 0-.9.3-1.6.8-2.1-.1-.2-.4-1 .1-2.1 0 0 .7-.2 2.2.8a7.5 7.5 0 0 1 4 0c1.5-1 2.2-.8 2.2-.8.5 1.1.2 1.9.1 2.1.5.6.8 1.3.8 2.1 0 3.1-1.9 3.8-3.7 4 .3.3.6.8.6 1.5v2.2c0 .2.1.5.6.4A8 8 0 0 0 8 .2z'/%3E%3C/svg%3E") center / contain no-repeat;
+      border-color: color-mix(in srgb, var(--ink) 28%, transparent);
+      background: rgba(255, 255, 255, 0.55);
     }
 
     @media (max-width: 860px) {
       .hero-grid,
       .how-layout,
-      .card-grid {
+      .card-grid,
+      .support-grid {
         grid-template-columns: 1fr;
       }
       .hero {

@@ -438,7 +438,7 @@ async function main() {
     },
     {
       out: '05-download',
-      hash: '#github',
+      hash: '#support',
       font: 'Poppins',
       popup: popupSearch('Poppins'),
     },
