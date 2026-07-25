@@ -1,0 +1,5 @@
+Upload public/videos/Preview.mp4 to YouTube (unlisted or public), then paste the URL below for Chrome Web Store → Globales Werbevideo:
+
+https://www.youtube.com/watch?v=YOUR_VIDEO_ID
+
+Landing page embeds the same file at /videos/Preview.mp4

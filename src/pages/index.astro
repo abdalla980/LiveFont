@@ -168,10 +168,17 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
               </li>
             ))}
           </ol>
-          <div class="demo-panel glass-card" data-animate-child>
-            <p class="demo-label">Live preview</p>
-            <p class="demo-sample">Swap fonts. Keep the page.</p>
-            <p class="demo-meta">Full walkthrough video — coming soon</p>
+          <div class="demo-panel video-panel glass-card" data-animate-child>
+            <video
+              class="demo-video"
+              src="/videos/Preview.mp4"
+              controls
+              playsinline
+              preload="metadata"
+              poster=""
+            >
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
       </div>
@@ -682,6 +689,25 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
         var(--plum);
       border-color: rgba(255,255,255,0.12);
       box-shadow: 0 20px 48px rgba(74, 53, 104, 0.28);
+    }
+
+    .video-panel {
+      padding: 10px;
+      overflow: hidden;
+      background: linear-gradient(155deg, rgba(255,255,255,0.72), rgba(238,240,244,0.5));
+      border-color: rgba(255,255,255,0.78);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.85) inset,
+        0 12px 32px rgba(42, 47, 58, 0.1);
+    }
+
+    .demo-video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      border-radius: 12px;
+      background: #2a2f3a;
     }
 
     .demo-label {

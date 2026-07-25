@@ -1,0 +1,1 @@
+Put Preview.mp4 in this folder (public/videos/Preview.mp4). The landing page embeds /videos/Preview.mp4.
