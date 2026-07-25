@@ -169,16 +169,15 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
             ))}
           </ol>
           <div class="demo-panel video-panel glass-card" data-animate-child>
-            <video
+            <iframe
               class="demo-video"
-              src="/videos/Preview.mp4"
-              controls
-              playsinline
-              preload="metadata"
-              poster=""
-            >
-              Your browser does not support the video tag.
-            </video>
+              src="https://www.youtube.com/embed/cFxZ6x6ZIHA"
+              title="LiveFonty walkthrough"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              loading="lazy"
+            ></iframe>
           </div>
         </div>
       </div>
@@ -705,7 +704,7 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       display: block;
       width: 100%;
       aspect-ratio: 16 / 10;
-      object-fit: cover;
+      border: 0;
       border-radius: 12px;
       background: #2a2f3a;
     }
