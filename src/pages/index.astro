@@ -7,22 +7,13 @@ const githubUrl = 'https://github.com/abdalla980/LiveFonty';
 
 const supportActions = [
   {
-    title: 'Download',
-    body: 'Install LiveFonty free from the Chrome Web Store and try fonts on any page.',
-    href: storeUrl,
-    label: 'Download for Chrome',
-    ga: 'download',
-    place: 'support',
-    style: 'primary',
-  },
-  {
     title: 'Leave a 5 star review',
-    body: 'Already using it? A quick 5 star rating on the Chrome Web Store helps others decide.',
+    body: 'Already using it? Tap five stars below — we’ll take you to the Chrome Web Store to finish the rating.',
     href: reviewUrl,
     label: 'Leave a 5 star review',
     ga: 'review',
     place: 'support',
-    style: 'secondary',
+    style: 'review',
   },
   {
     title: 'Star on GitHub',
@@ -275,29 +266,43 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
     <section id="support" class="section support" data-animate>
       <div class="wrap">
         <p class="eyebrow">Next steps</p>
-        <h2>Three ways to help LiveFonty grow.</h2>
-        <p class="lead center">One primary action — install it. Reviews and stars help the rest.</p>
-        <div class="support-grid">
+        <h2>Liked LiveFonty? Help it grow.</h2>
+        <p class="lead center">Download stays in the header — here you can rate it or star the project.</p>
+        <div class="support-grid support-grid-two">
           {supportActions.map((a) => (
             <article class="glass-card support-card" data-animate-child>
               <h3>{a.title}</h3>
               <p>{a.body}</p>
-              <a
-                class={
-                  a.style === 'primary'
-                    ? 'cta-primary'
-                    : a.style === 'github'
-                      ? 'cta-github'
-                      : 'cta-secondary'
-                }
-                href={a.href}
-                target="_blank"
-                rel="noopener"
-                data-ga={a.ga}
-                data-ga-place={a.place}
-              >
-                {a.label}
-              </a>
+              {a.style === 'review' ? (
+                <div class="star-rate" role="group" aria-label="Leave a 5 star review on the Chrome Web Store">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <a
+                      class="star-rate-btn"
+                      href={a.href}
+                      target="_blank"
+                      rel="noopener"
+                      data-ga={a.ga}
+                      data-ga-place={a.place}
+                      data-stars={n}
+                      aria-label={`Rate ${n} star${n === 1 ? '' : 's'} on the Chrome Web Store`}
+                      title="Opens Chrome Web Store to leave your rating"
+                    >
+                      <span class="star-icon" aria-hidden="true"></span>
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <a
+                  class="cta-github"
+                  href={a.href}
+                  target="_blank"
+                  rel="noopener"
+                  data-ga={a.ga}
+                  data-ga-place={a.place}
+                >
+                  {a.label}
+                </a>
+              )}
             </article>
           ))}
         </div>
@@ -929,6 +934,13 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       margin-top: 8px;
     }
 
+    .support-grid-two {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 760px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     .support-card {
       display: flex;
       flex-direction: column;
@@ -945,33 +957,43 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       margin: 0 0 20px;
     }
 
-    .support-card .cta-primary,
-    .support-card .cta-secondary,
     .support-card .cta-github {
       align-self: flex-start;
       width: auto;
     }
 
-    .cta-secondary {
+    .star-rate {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .star-rate-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 22px;
-      border-radius: 999px;
-      background: transparent;
-      color: var(--ink);
-      font-family: var(--font);
-      font-size: 14px;
-      font-weight: 500;
-      text-decoration: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
       border: 1px solid var(--border);
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      background: rgba(255, 255, 255, 0.65);
+      text-decoration: none;
+      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
     }
 
-    .cta-secondary:hover {
+    .star-rate-btn:hover,
+    .star-rate:hover .star-rate-btn {
       transform: translateY(-2px);
-      border-color: color-mix(in srgb, var(--ink) 28%, transparent);
-      background: rgba(255, 255, 255, 0.55);
+      border-color: color-mix(in srgb, var(--mustard) 55%, transparent);
+      background: color-mix(in srgb, var(--lemon) 28%, white);
+    }
+
+    .star-icon {
+      width: 22px;
+      height: 22px;
+      background: var(--mustard);
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z'/%3E%3C/svg%3E") center / contain no-repeat;
     }
 
     .cta-github {
@@ -1010,7 +1032,8 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       .hero-grid,
       .how-layout,
       .card-grid,
-      .support-grid {
+      .support-grid,
+      .support-grid-two {
         grid-template-columns: 1fr;
       }
       .hero {
