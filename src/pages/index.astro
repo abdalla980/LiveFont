@@ -6,11 +6,11 @@ const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpn
 const features = [
   {
     title: 'Search all fonts',
-    body: 'Type to filter the entire Google Fonts catalog — 1,900+ families — and apply any of them to the page you’re viewing in one click.',
+    body: 'Filter 1,900+ Google Font families and apply any of them to the page you’re viewing in one click.',
   },
   {
     title: 'Brand vibe picker',
-    body: 'Pick a personality — Modern & Minimal, Bold & Edgy, Elegant & Luxury, and more — and get a curated shortlist that fits.',
+    body: 'Pick a personality — Modern, Bold, Elegant, and more — and get a curated shortlist that fits.',
   },
   {
     title: 'Top 10, real data',
@@ -74,23 +74,49 @@ const faqs = [
     a: 'Designers, frontend developers, and anyone making creative or branding decisions who wants to test typography in seconds.',
   },
 ];
+
+const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM Sans', 'Libre Baskerville', 'Syne', 'Fraunces'];
 ---
 <Layout title="LiveFonty — Live-preview Google Fonts on any website" description="Instantly preview any Google Font on the page you're viewing. Search 1,900+ fonts, browse by brand vibe, or pick from a real-data Top 10.">
   <main>
     <section class="hero">
-      <div class="wrap hero-inner">
-        <p class="eyebrow hero-anim">Chrome extension</p>
-        <p class="brand-hero hero-anim">LiveFonty</p>
-        <h1 class="hero-anim">See your site in a different font before you commit.</h1>
-        <p class="lead hero-anim">
-          Preview any Google Font on the page you're viewing — instantly, with no code changes.
-        </p>
-        <div class="cta-row hero-anim">
-          <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+      <div class="hero-sheen" aria-hidden="true"></div>
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow hero-anim">Chrome extension · type lab</p>
+          <p class="brand-hero hero-anim">LiveFonty</p>
+          <h1 class="hero-anim">Preview fonts on the real page — before you commit.</h1>
+          <p class="lead hero-anim">
+            Drop any Google Font onto the site you’re viewing. No code, no reload, no guesswork.
+          </p>
+          <div class="cta-row hero-anim">
+            <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+          </div>
         </div>
-        <div class="specimen hero-anim" aria-hidden="true">
-          <span class="specimen-aa">Aa</span>
-          <span class="specimen-line">The quick brown fox</span>
+
+        <div class="hero-lab hero-anim" aria-hidden="true">
+          <div class="lab-chrome">
+            <span class="lab-dot"></span>
+            <span class="lab-dot"></span>
+            <span class="lab-dot"></span>
+            <span class="lab-title">Live preview</span>
+          </div>
+          <div class="lab-stage">
+            <p class="lab-label" id="lab-font-name">Playfair Display</p>
+            <p class="lab-sample" id="lab-sample">Typography, tested in place.</p>
+            <div class="lab-bar">
+              <span class="lab-pill">Weight 500</span>
+              <span class="lab-pill">Live tab</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="marquee hero-anim" aria-hidden="true">
+        <div class="marquee-track">
+          {[...marqueeFonts, ...marqueeFonts].map((name) => (
+            <span>{name}</span>
+          ))}
         </div>
       </div>
     </section>
@@ -99,12 +125,12 @@ const faqs = [
       <div class="wrap">
         <p class="eyebrow">Who it's for</p>
         <h2>Built for people who obsess over type.</h2>
-        <div class="audience-grid">
+        <div class="card-grid">
           {audience.map((a) => (
-            <div class="audience-item" data-animate-child>
+            <article class="glass-card" data-animate-child>
               <h3>{a.title}</h3>
               <p>{a.body}</p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
@@ -114,15 +140,13 @@ const faqs = [
       <div class="wrap">
         <p class="eyebrow">Features</p>
         <h2>Everything you need to try a font on for size.</h2>
-        <div class="feature-list">
+        <div class="card-grid features-grid">
           {features.map((f, i) => (
-            <div class="feature-row" data-animate-child>
-              <span class="feature-num">{String(i + 1).padStart(2, '0')}</span>
-              <div>
-                <h3>{f.title}</h3>
-                <p>{f.body}</p>
-              </div>
-            </div>
+            <article class="glass-card feature-card" data-animate-child>
+              <span class="card-index">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{f.title}</h3>
+              <p>{f.body}</p>
+            </article>
           ))}
         </div>
       </div>
@@ -135,7 +159,7 @@ const faqs = [
         <div class="how-layout">
           <ol class="how-steps">
             {steps.map((s, i) => (
-              <li data-animate-child>
+              <li class="glass-card step-card" data-animate-child>
                 <span class="step-num">{i + 1}</span>
                 <div>
                   <h3>{s.title}</h3>
@@ -144,9 +168,9 @@ const faqs = [
               </li>
             ))}
           </ol>
-          <div class="demo-panel" data-animate-child>
+          <div class="demo-panel glass-card" data-animate-child>
             <p class="demo-label">Live preview</p>
-            <p class="demo-sample">Typography, tested in place.</p>
+            <p class="demo-sample">Swap type. Keep the page.</p>
             <p class="demo-meta">Full walkthrough video — coming soon</p>
           </div>
         </div>
@@ -157,8 +181,8 @@ const faqs = [
       <div class="wrap">
         <p class="eyebrow">Roadmap</p>
         <h2>Got an idea for LiveFonty?</h2>
-        <p class="lead">We're actively building. Tell us what would make this more useful for you.</p>
-        <div class="suggest-panel">
+        <p class="lead center">We're actively building. Tell us what would make this more useful for you.</p>
+        <div class="suggest-panel glass-card" data-animate-child>
           <form
             name="feature-suggestions"
             method="POST"
@@ -198,7 +222,7 @@ const faqs = [
         <h2>Questions, answered.</h2>
         <div class="faq-list">
           {faqs.map((f) => (
-            <details class="faq-item" data-animate-child>
+            <details class="faq-item glass-card" data-animate-child>
               <summary>
                 <span>{f.q}</span>
                 <span class="chevron" aria-hidden="true"></span>
@@ -212,9 +236,11 @@ const faqs = [
 
     <section id="download" class="section cta-bottom" data-animate>
       <div class="wrap">
-        <h2>See it on your own site.</h2>
-        <p>Free, instant, no code changes.</p>
-        <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+        <div class="cta-panel glass-card" data-animate-child>
+          <h2>See it on your own site.</h2>
+          <p>Free, instant, no code changes.</p>
+          <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+        </div>
       </div>
     </section>
   </main>
@@ -256,139 +282,297 @@ const faqs = [
 
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!reduced) {
-      gsap.from('.hero-anim', {
-        opacity: 0,
-        y: 28,
-        duration: 0.85,
-        stagger: 0.12,
-        ease: 'power3.out',
-        delay: 0.08,
-      });
+    const samples = [
+      { name: 'Playfair Display', text: 'Typography, tested in place.', weight: '500' },
+      { name: 'Space Grotesk', text: 'See the page. Change the type.', weight: '400' },
+      { name: 'Cormorant Garamond', text: 'Commit after you feel it.', weight: '500' },
+      { name: 'Syne', text: '1,900+ fonts. One click.', weight: '600' },
+    ];
 
-      gsap.to('.specimen-aa', {
-        y: -10,
-        duration: 3.2,
+    if (!reduced) {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+      tl.from('.hero-anim', {
+        opacity: 0,
+        y: 32,
+        filter: 'blur(6px)',
+        duration: 0.9,
+        stagger: 0.11,
+      }).from('.hero-sheen', {
+        opacity: 0,
+        duration: 1.2,
+      }, '-=0.6');
+
+      gsap.to('.hero-sheen', {
+        backgroundPosition: '120% 40%',
+        duration: 8,
         repeat: -1,
         yoyo: true,
         ease: 'sine.inOut',
       });
 
+      gsap.to('.marquee-track', {
+        xPercent: -50,
+        duration: 28,
+        ease: 'none',
+        repeat: -1,
+      });
+
+      const nameEl = document.getElementById('lab-font-name');
+      const sampleEl = document.getElementById('lab-sample');
+      let sampleIndex = 0;
+
+      const cycleLab = () => {
+        sampleIndex = (sampleIndex + 1) % samples.length;
+        const next = samples[sampleIndex];
+        const swap = gsap.timeline();
+        swap
+          .to([nameEl, sampleEl], { opacity: 0, y: -8, duration: 0.35, ease: 'power2.in' })
+          .add(() => {
+            if (nameEl) nameEl.textContent = next.name;
+            if (sampleEl) {
+              sampleEl.textContent = next.text;
+              sampleEl.style.fontWeight = next.weight;
+            }
+          })
+          .to([nameEl, sampleEl], { opacity: 1, y: 0, duration: 0.45, ease: 'power2.out' });
+      };
+
+      gsap.delayedCall(2.8, () => {
+        cycleLab();
+        gsap.delayedCall(3.2, function loop() {
+          cycleLab();
+          gsap.delayedCall(3.2, loop);
+        });
+      });
+
+      document.querySelectorAll('.glass-card').forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, { y: -6, duration: 0.35, ease: 'power2.out' });
+        });
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, { y: 0, duration: 0.4, ease: 'power2.out' });
+        });
+      });
+
       document.querySelectorAll('[data-animate]').forEach((section) => {
         const kids = section.querySelectorAll('[data-animate-child]');
-        const targets = kids.length ? kids : [section.querySelector('.wrap') ?? section];
+        const targets = kids.length ? kids : [section];
 
         gsap.from(targets, {
           opacity: 0,
-          y: 36,
-          duration: 0.7,
+          y: 40,
+          duration: 0.75,
           stagger: 0.1,
           ease: 'power2.out',
           scrollTrigger: {
             trigger: section,
-            start: 'top 78%',
+            start: 'top 80%',
             once: true,
           },
         });
       });
+    } else {
+      const nameEl = document.getElementById('lab-font-name');
+      const sampleEl = document.getElementById('lab-sample');
+      if (nameEl) nameEl.textContent = samples[0].name;
+      if (sampleEl) sampleEl.textContent = samples[0].text;
     }
   </script>
 
   <style>
     .hero {
-      padding: 56px 0 28px;
-      min-height: min(88vh, 820px);
+      position: relative;
+      padding: 48px 0 0;
+      overflow: hidden;
+      min-height: min(92vh, 860px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .hero-sheen {
+      pointer-events: none;
+      position: absolute;
+      inset: -20% -10%;
+      background: linear-gradient(
+        105deg,
+        transparent 30%,
+        rgba(255, 255, 255, 0.55) 48%,
+        rgba(197, 202, 211, 0.25) 52%,
+        transparent 70%
+      );
+      background-size: 200% 100%;
+      background-position: 0% 40%;
+      opacity: 0.7;
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+      padding-bottom: 36px;
+    }
+
+    .brand-hero {
+      font-size: clamp(42px, 7vw, 72px);
+      font-weight: 500;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin: 0 0 16px;
+      color: var(--ink);
+    }
+
+    .hero h1 {
+      font-size: clamp(22px, 2.8vw, 30px);
+      font-weight: 400;
+      line-height: 1.35;
+      max-width: 420px;
+      margin: 0 0 14px;
+      color: var(--ink);
+    }
+
+    .lead {
+      font-size: 15px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: var(--ink-soft);
+      max-width: 400px;
+      margin: 0;
+    }
+
+    .lead.center {
+      margin: 0 auto 28px;
+      text-align: center;
+      max-width: 480px;
+    }
+
+    .cta-row { margin-top: 28px; }
+
+    .hero-lab {
+      border-radius: 22px;
+      overflow: hidden;
+      background: linear-gradient(160deg, rgba(255,255,255,0.78), rgba(238,240,244,0.55));
+      border: 1px solid rgba(255,255,255,0.8);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.9) inset,
+        0 24px 50px rgba(42, 47, 58, 0.1);
+      backdrop-filter: blur(18px);
+    }
+
+    .lab-chrome {
       display: flex;
       align-items: center;
+      gap: 7px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.35);
     }
-    .hero-inner {
-      text-align: center;
-      position: relative;
-      padding-bottom: 48px;
+
+    .lab-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--silver-3);
     }
-    .brand-hero {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: clamp(48px, 10vw, 88px);
-      line-height: 0.95;
-      letter-spacing: -0.045em;
-      margin: 0 0 18px;
-      color: var(--plum);
-      background: linear-gradient(120deg, var(--plum) 20%, #6b4c9a 55%, var(--mustard) 110%);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .lab-dot:nth-child(1) { background: #e8a0a0; }
+    .lab-dot:nth-child(2) { background: #e0c97a; }
+    .lab-dot:nth-child(3) { background: #9ec7a8; }
+
+    .lab-title {
+      margin-left: auto;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
     }
-    h1 {
-      font-size: clamp(26px, 4.2vw, 38px);
-      line-height: 1.2;
-      font-weight: 700;
-      max-width: 620px;
-      margin: 0 auto 16px;
-      color: var(--plum);
-    }
-    .lead {
-      font-size: 16px;
-      line-height: 1.65;
-      color: var(--plum-soft);
-      max-width: 480px;
-      margin: 0 auto;
-    }
-    .cta-row {
-      margin-top: 28px;
-    }
-    .specimen {
-      margin-top: 48px;
-      padding: 36px 24px 40px;
-      border-radius: 18px;
+
+    .lab-stage {
+      padding: 36px 28px 32px;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
       background:
-        linear-gradient(145deg, color-mix(in srgb, var(--lilac-deep) 70%, white), color-mix(in srgb, var(--cream) 80%, white));
-      border: 1px solid var(--border);
-      display: grid;
-      gap: 8px;
-      justify-items: center;
+        radial-gradient(circle at 80% 20%, rgba(74, 53, 104, 0.08), transparent 45%),
+        radial-gradient(circle at 10% 90%, rgba(196, 160, 53, 0.12), transparent 40%);
     }
-    .specimen-aa {
-      font-family: var(--font-display);
-      font-size: clamp(72px, 16vw, 120px);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.06em;
-      color: var(--plum);
-      display: block;
-    }
-    .specimen-line {
-      font-family: var(--font-display);
-      font-size: clamp(18px, 3vw, 28px);
+
+    .lab-label {
+      margin: 0;
+      font-size: 12px;
       font-weight: 500;
-      color: var(--mustard);
-      letter-spacing: -0.02em;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--plum);
+    }
+
+    .lab-sample {
+      margin: 0;
+      font-size: clamp(28px, 3.4vw, 40px);
+      font-weight: 500;
+      line-height: 1.2;
+      letter-spacing: -0.035em;
+      color: var(--ink);
+    }
+
+    .lab-bar {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .lab-pill {
+      font-size: 11px;
+      font-weight: 400;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid var(--border);
+      color: var(--ink-soft);
+    }
+
+    .marquee {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.28);
+      overflow: hidden;
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    }
+
+    .marquee-track {
+      display: flex;
+      gap: 40px;
+      width: max-content;
+      padding: 16px 0;
+      will-change: transform;
+    }
+
+    .marquee-track span {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      color: var(--ink-soft);
+      white-space: nowrap;
     }
 
     .section {
       padding: 88px 0;
     }
+
     .section h2 {
-      font-size: clamp(26px, 3.5vw, 34px);
+      font-size: clamp(26px, 3.4vw, 34px);
+      font-weight: 500;
       margin: 0 0 36px;
       max-width: 520px;
     }
-    .audience h2,
-    .suggest h2,
-    .cta-bottom h2,
-    #features h2,
-    .how h2,
-    .faq h2 {
-      text-align: left;
-    }
-    .audience .wrap > h2,
-    #features .wrap > h2,
-    .suggest .wrap > h2,
-    .cta-bottom .wrap > h2 {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
+
     .audience .eyebrow,
     #features .eyebrow,
     .suggest .eyebrow,
@@ -396,259 +580,282 @@ const faqs = [
       text-align: center;
     }
 
-    .audience-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px 32px;
-    }
-    .audience-item h3 {
-      font-size: 20px;
-      margin: 0 0 8px;
-    }
-    .audience-item p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--plum-soft);
+    .audience h2,
+    #features h2,
+    .suggest h2 {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
     }
 
-    .feature-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      border-top: 1px solid var(--border);
+    .glass-card {
+      background: linear-gradient(155deg, rgba(255,255,255,0.72), rgba(238,240,244,0.42));
+      border: 1px solid rgba(255,255,255,0.78);
+      border-radius: var(--radius);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.85) inset,
+        0 12px 32px rgba(42, 47, 58, 0.07);
+      backdrop-filter: blur(14px);
+      padding: 28px 24px;
     }
-    .feature-row {
+
+    .card-grid {
       display: grid;
-      grid-template-columns: 64px 1fr;
-      gap: 20px;
-      padding: 28px 0;
-      border-bottom: 1px solid var(--border);
-      text-align: left;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
-    .feature-num {
-      font-family: var(--font-display);
-      font-size: 28px;
-      font-weight: 700;
-      color: var(--mustard);
-      line-height: 1;
+
+    .glass-card h3 {
+      font-size: 18px;
+      font-weight: 500;
+      margin: 0 0 10px;
     }
-    .feature-row h3 {
-      font-size: 20px;
-      margin: 0 0 8px;
-    }
-    .feature-row p {
+
+    .glass-card p {
       margin: 0;
       font-size: 14px;
       line-height: 1.65;
-      color: var(--plum-soft);
-      max-width: 520px;
+      font-weight: 300;
+      color: var(--ink-soft);
+    }
+
+    .feature-card {
+      min-height: 200px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card-index {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--mustard);
+      margin-bottom: 18px;
     }
 
     .how-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 40px;
+      gap: 22px;
       align-items: start;
     }
+
     .how-steps {
       list-style: none;
       margin: 0;
       padding: 0;
       display: flex;
       flex-direction: column;
-      gap: 28px;
+      gap: 14px;
     }
-    .how-steps li {
+
+    .step-card {
       display: flex;
       gap: 16px;
+      align-items: flex-start;
+      padding: 20px 22px;
     }
+
     .step-num {
       flex: none;
-      width: 34px;
-      height: 34px;
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
-      background: var(--plum);
-      color: var(--lemon);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 14px;
+      font-size: 13px;
+      font-weight: 500;
+      background: var(--ink);
+      color: #f5f6f8;
     }
-    .how-steps h3 {
-      font-size: 18px;
-      margin: 0 0 6px;
-    }
-    .how-steps p {
-      margin: 0;
-      font-size: 14px;
-      line-height: 1.65;
-      color: var(--plum-soft);
-    }
+
     .demo-panel {
-      border-radius: 16px;
-      padding: 40px 28px;
-      background: linear-gradient(150deg, var(--plum) 0%, #4a2d72 55%, #6b4c9a 100%);
-      color: var(--cream);
-      min-height: 240px;
+      min-height: 280px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       gap: 12px;
+      padding: 40px 32px;
+      background:
+        linear-gradient(150deg, rgba(74, 53, 104, 0.92), rgba(58, 45, 82, 0.95)),
+        var(--plum);
+      border-color: rgba(255,255,255,0.12);
+      box-shadow: 0 20px 48px rgba(74, 53, 104, 0.28);
     }
+
     .demo-label {
       margin: 0;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--lemon);
     }
+
     .demo-sample {
       margin: 0;
-      font-family: var(--font-display);
-      font-size: clamp(28px, 4vw, 40px);
-      font-weight: 700;
-      line-height: 1.15;
+      font-size: clamp(26px, 3.4vw, 36px);
+      font-weight: 500;
+      line-height: 1.2;
       letter-spacing: -0.03em;
       color: #fff8ea;
     }
+
     .demo-meta {
-      margin: 8px 0 0;
+      margin: 6px 0 0;
       font-size: 13px;
-      color: color-mix(in srgb, var(--cream) 70%, transparent);
+      font-weight: 300;
+      color: rgba(245, 236, 208, 0.7);
     }
 
-    .suggest {
-      text-align: center;
-    }
-    .suggest .lead {
-      margin-bottom: 32px;
-    }
+    .suggest { text-align: center; }
+
     .suggest-panel {
-      max-width: 480px;
+      max-width: 500px;
       margin: 0 auto;
       text-align: left;
     }
+
     .hp-field {
       position: absolute;
       left: -9999px;
     }
-    .field-row {
-      margin-bottom: 16px;
-    }
+
+    .field-row { margin-bottom: 16px; }
+
     .field-row label {
       display: block;
       font-size: 13px;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: var(--plum);
-    }
-    .field-row .optional {
       font-weight: 400;
-      color: var(--plum-soft);
+      margin-bottom: 6px;
+      color: var(--ink);
     }
+
+    .field-row .optional {
+      font-weight: 300;
+      color: var(--ink-soft);
+    }
+
     .field-row input,
     .field-row textarea {
       width: 100%;
       padding: 12px 14px;
-      border-radius: 8px;
+      border-radius: 12px;
       border: 1px solid var(--border);
       font-family: inherit;
       font-size: 14px;
-      color: var(--plum);
-      background: color-mix(in srgb, white 70%, var(--lilac));
+      font-weight: 300;
+      color: var(--ink);
+      background: rgba(255,255,255,0.7);
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
+
     .field-row input:focus,
     .field-row textarea:focus {
       outline: none;
-      border-color: var(--mustard);
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--mustard) 28%, transparent);
+      border-color: var(--plum);
+      box-shadow: 0 0 0 3px rgba(74, 53, 104, 0.15);
     }
+
     .field-row textarea { resize: vertical; }
-    #suggest-form .cta-primary {
-      width: 100%;
-    }
+    #suggest-form .cta-primary { width: 100%; border-radius: 12px; }
+
     .form-error {
       color: #8b2e4b;
       font-size: 13px;
       margin: 12px 0 0;
     }
+
     .suggest-success {
       text-align: center;
-      padding: 28px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-weight: 600;
-      color: var(--plum);
-      background: color-mix(in srgb, var(--lemon) 18%, white);
+      padding: 12px;
+      font-weight: 400;
+      color: var(--ink);
     }
 
     .faq-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
+      max-width: 720px;
     }
+
     .faq-item {
-      border-bottom: 1px solid var(--border);
-      padding: 4px 0 14px;
+      padding: 4px 20px 14px;
     }
+
     .faq-item summary {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 400;
       font-size: 15px;
-      color: var(--plum);
+      color: var(--ink);
       list-style: none;
-      padding: 12px 0;
+      padding: 14px 0 8px;
     }
+
     .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary:hover { color: #4a2d72; }
+    .faq-item summary:hover { color: var(--plum); }
+
     .faq-item .chevron {
       flex: none;
-      width: 10px;
-      height: 10px;
+      width: 9px;
+      height: 9px;
       border-right: 2px solid var(--mustard);
       border-bottom: 2px solid var(--mustard);
       transform: rotate(45deg);
       transition: transform 0.2s ease;
     }
-    .faq-item[open] .chevron {
-      transform: rotate(-135deg);
-    }
+
+    .faq-item[open] .chevron { transform: rotate(-135deg); }
+
     .faq-item p {
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       font-size: 14px;
       line-height: 1.65;
-      color: var(--plum-soft);
-      max-width: 640px;
+      font-weight: 300;
+      color: var(--ink-soft);
     }
 
     .cta-bottom {
       text-align: center;
       padding-bottom: 110px;
     }
-    .cta-bottom h2 {
-      font-size: clamp(28px, 4vw, 36px);
-      margin: 0 0 10px;
-    }
-    .cta-bottom p {
-      color: var(--plum-soft);
-      font-size: 15px;
-      margin: 0 0 28px;
+
+    .cta-panel {
+      padding: 48px 32px;
+      max-width: 640px;
+      margin: 0 auto;
     }
 
-    @media (max-width: 720px) {
-      .audience-grid { grid-template-columns: 1fr; }
-      .how-layout { grid-template-columns: 1fr; }
-      .feature-row { grid-template-columns: 48px 1fr; gap: 14px; }
-      .hero { min-height: auto; padding-top: 40px; }
+    .cta-panel h2 {
+      margin: 0 0 10px;
+      max-width: none;
+    }
+
+    .cta-panel p {
+      color: var(--ink-soft);
+      font-size: 15px;
+      font-weight: 300;
+      margin: 0 0 24px;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .how-layout,
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        min-height: auto;
+        padding-top: 36px;
+      }
       .section { padding: 64px 0; }
+      .hero h1 { max-width: none; }
     }
   </style>
 </Layout>

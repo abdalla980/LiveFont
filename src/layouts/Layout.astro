@@ -12,71 +12,70 @@ const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpn
   <link rel="icon" href="/icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script is:inline>document.documentElement.classList.add('js-enabled');</script>
   <style is:global>
     :root {
-      --plum: #2f1a4a;
-      --plum-soft: #5a4a72;
-      --lilac: #efe8f7;
-      --lilac-deep: #e4d4f5;
-      --cream: #f5ecd0;
-      --mustard: #c9a227;
-      --lemon: #f0c93a;
-      --surface: #faf6ff;
-      --ink: var(--plum);
-      --muted: var(--plum-soft);
-      --border: color-mix(in srgb, var(--plum) 14%, transparent);
-      --accent: var(--mustard);
-      --accent-bright: var(--lemon);
-      --radius: 10px;
-      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-      --font-body: 'Sora', system-ui, sans-serif;
+      --silver-0: #f7f8fa;
+      --silver-1: #eef0f4;
+      --silver-2: #dde1e8;
+      --silver-3: #c5cad3;
+      --silver-4: #9aa3b0;
+      --ink: #2a2f3a;
+      --ink-soft: #5c6575;
+      --plum: #4a3568;
+      --mustard: #c4a035;
+      --lemon: #e8c84a;
+      --card: rgba(255, 255, 255, 0.55);
+      --card-border: rgba(255, 255, 255, 0.75);
+      --border: rgba(42, 47, 58, 0.1);
+      --font: 'Poppins', system-ui, sans-serif;
+      --radius: 18px;
     }
 
     * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     html, body {
       margin: 0;
       padding: 0;
       min-height: 100%;
-      background:
-        radial-gradient(ellipse 80% 50% at 100% -10%, rgba(240, 201, 58, 0.22), transparent 55%),
-        radial-gradient(ellipse 70% 45% at -5% 20%, rgba(228, 212, 245, 0.9), transparent 50%),
-        linear-gradient(165deg, var(--lilac) 0%, var(--surface) 42%, var(--cream) 100%);
-      background-attachment: fixed;
       color: var(--ink);
-      font-family: var(--font-body);
-      font-weight: 400;
+      font-family: var(--font);
+      font-weight: 300;
       -webkit-font-smoothing: antialiased;
+      background-color: var(--silver-1);
+      background-image:
+        linear-gradient(125deg, rgba(255,255,255,0.85) 0%, transparent 42%),
+        linear-gradient(305deg, rgba(197,202,211,0.55) 0%, transparent 48%),
+        radial-gradient(ellipse 90% 60% at 50% -20%, #ffffff 0%, transparent 55%),
+        linear-gradient(180deg, var(--silver-0) 0%, var(--silver-1) 35%, var(--silver-2) 100%);
+      background-attachment: fixed;
     }
 
     h1, h2, h3 {
-      font-family: var(--font-display);
-      font-weight: 700;
+      font-family: var(--font);
+      font-weight: 500;
       letter-spacing: -0.03em;
-      color: var(--plum);
+      color: var(--ink);
+      margin: 0;
     }
 
     a { color: inherit; }
 
     .wrap {
-      max-width: 960px;
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
     }
 
     .eyebrow {
-      font-family: var(--font-body);
       font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.16em;
+      font-weight: 500;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--mustard);
+      color: var(--plum);
       margin: 0 0 12px;
     }
 
@@ -84,23 +83,23 @@ const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpn
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      padding: 14px 26px;
-      border-radius: 8px;
-      background: var(--plum);
-      color: var(--lemon);
-      font-family: var(--font-body);
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: linear-gradient(145deg, #3d334f 0%, var(--plum) 100%);
+      color: #fff8e8;
+      font-family: var(--font);
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 500;
       text-decoration: none;
-      border: none;
+      border: 1px solid rgba(255,255,255,0.12);
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+      box-shadow: 0 10px 28px rgba(74, 53, 104, 0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
     .cta-primary:hover {
-      background: #3d2460;
       transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(74, 53, 104, 0.3);
     }
 
     .cta-primary:disabled {
@@ -119,60 +118,58 @@ const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpn
       position: sticky;
       top: 0;
       z-index: 40;
-      backdrop-filter: blur(12px);
-      background: color-mix(in srgb, var(--lilac) 78%, transparent);
-      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px) saturate(1.2);
+      background: rgba(247, 248, 250, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.5);
+      box-shadow: 0 1px 0 rgba(42, 47, 58, 0.06);
     }
     header.site .wrap {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 68px;
+      height: 64px;
       gap: 24px;
     }
     .brand {
-      font-family: var(--font-display);
-      font-weight: 800;
-      font-size: 22px;
+      font-weight: 500;
+      font-size: 20px;
       letter-spacing: -0.04em;
       text-decoration: none;
-      color: var(--plum);
+      color: var(--ink);
     }
-    .brand span {
-      color: var(--mustard);
-    }
+    .brand span { color: var(--plum); font-weight: 400; }
     .site-nav {
       display: flex;
       align-items: center;
       gap: 22px;
     }
     .site-nav a {
-      color: var(--plum-soft);
+      color: var(--ink-soft);
       text-decoration: none;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 400;
     }
-    .site-nav a:hover {
-      color: var(--plum);
-    }
+    .site-nav a:hover { color: var(--ink); }
     .site-nav .nav-cta {
-      padding: 9px 16px;
-      border-radius: 8px;
-      background: var(--plum);
-      color: var(--lemon);
-      font-weight: 600;
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: #f5f6f8;
+      font-weight: 500;
+      box-shadow: none;
     }
     .site-nav .nav-cta:hover {
-      color: var(--lemon);
-      background: #3d2460;
+      color: #fff;
+      transform: none;
+      box-shadow: none;
     }
     @media (max-width: 640px) {
       .site-nav a:not(.nav-cta) { display: none; }
     }
     footer.site {
-      margin-top: 24px;
+      margin-top: 8px;
       border-top: 1px solid var(--border);
-      background: color-mix(in srgb, var(--lilac-deep) 45%, transparent);
+      background: rgba(221, 225, 232, 0.45);
     }
     footer.site .wrap {
       display: flex;
@@ -184,19 +181,16 @@ const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpn
       padding-top: 20px;
       padding-bottom: 20px;
     }
-    footer.site nav {
-      display: flex;
-      gap: 20px;
-    }
+    footer.site nav { display: flex; gap: 20px; }
     footer.site a {
-      color: var(--plum-soft);
+      color: var(--ink-soft);
       text-decoration: none;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 400;
     }
-    footer.site a:hover { color: var(--plum); }
+    footer.site a:hover { color: var(--ink); }
     footer.site .copy {
-      color: var(--plum-soft);
+      color: var(--ink-soft);
       font-size: 13px;
     }
   </style>
