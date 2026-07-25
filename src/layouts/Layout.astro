@@ -1,5 +1,6 @@
 ---
 const { title, description } = Astro.props;
+const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpnhdmdncdenhj?utm_source=item-share-cb';
 ---
 <!doctype html>
 <html lang="en">
@@ -11,152 +12,204 @@ const { title, description } = Astro.props;
   <link rel="icon" href="/icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <script is:inline>document.documentElement.classList.add('js-enabled');</script>
-  <style>
+  <style is:global>
     :root {
-      --ink: #0a0a0a;
-      --muted: #52525b;
-      --border: #e4e4e7;
-      --red: #7e0c0c;
-      --red-bright: #e5484d;
-      --night-text: #fafafa;
-      --night-muted: #a1a1aa;
-      --night-border: #262626;
+      --plum: #2f1a4a;
+      --plum-soft: #5a4a72;
+      --lilac: #efe8f7;
+      --lilac-deep: #e4d4f5;
+      --cream: #f5ecd0;
+      --mustard: #c9a227;
+      --lemon: #f0c93a;
+      --surface: #faf6ff;
+      --ink: var(--plum);
+      --muted: var(--plum-soft);
+      --border: color-mix(in srgb, var(--plum) 14%, transparent);
+      --accent: var(--mustard);
+      --accent-bright: var(--lemon);
+      --radius: 10px;
+      --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+      --font-body: 'Sora', system-ui, sans-serif;
     }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(ellipse 80% 50% at 100% -10%, rgba(240, 201, 58, 0.22), transparent 55%),
+        radial-gradient(ellipse 70% 45% at -5% 20%, rgba(228, 212, 245, 0.9), transparent 50%),
+        linear-gradient(165deg, var(--lilac) 0%, var(--surface) 42%, var(--cream) 100%);
+      background-attachment: fixed;
+      color: var(--ink);
+      font-family: var(--font-body);
+      font-weight: 400;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: var(--plum);
+    }
+
+    a { color: inherit; }
+
+    .wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mustard);
+      margin: 0 0 12px;
+    }
+
+    .cta-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 26px;
+      border-radius: 8px;
+      background: var(--plum);
+      color: var(--lemon);
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+    }
+
+    .cta-primary:hover {
+      background: #3d2460;
+      transform: translateY(-2px);
+    }
+
+    .cta-primary:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .cta-primary { transition: none; }
+    }
+  </style>
+  <style>
     header.site {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(12px);
+      background: color-mix(in srgb, var(--lilac) 78%, transparent);
       border-bottom: 1px solid var(--border);
     }
     header.site .wrap {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 72px;
+      height: 68px;
       gap: 24px;
     }
     .brand {
-      display: flex;
-      align-items: center;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 22px;
+      letter-spacing: -0.04em;
       text-decoration: none;
+      color: var(--plum);
     }
-    .brand img {
-      height: 26px;
-      width: auto;
-      display: block;
+    .brand span {
+      color: var(--mustard);
     }
     .site-nav {
       display: flex;
       align-items: center;
-      gap: 24px;
+      gap: 22px;
     }
     .site-nav a {
-      color: var(--muted);
+      color: var(--plum-soft);
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
     }
     .site-nav a:hover {
-      color: var(--ink);
+      color: var(--plum);
     }
     .site-nav .nav-cta {
-      display: inline-block;
-      padding: 8px 16px;
+      padding: 9px 16px;
       border-radius: 8px;
-      background: var(--ink);
-      color: #fff;
+      background: var(--plum);
+      color: var(--lemon);
       font-weight: 600;
-      transition: opacity 0.15s ease;
     }
     .site-nav .nav-cta:hover {
-      opacity: 0.85;
-      color: #fff;
+      color: var(--lemon);
+      background: #3d2460;
     }
     @media (max-width: 640px) {
-      .site-nav a:not(.nav-cta) {
-        display: none;
-      }
+      .site-nav a:not(.nav-cta) { display: none; }
     }
     footer.site {
+      margin-top: 24px;
       border-top: 1px solid var(--border);
-      margin-top: 0;
+      background: color-mix(in srgb, var(--lilac-deep) 45%, transparent);
     }
     footer.site .wrap {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
+      min-height: 72px;
       flex-wrap: wrap;
       gap: 12px;
+      padding-top: 20px;
+      padding-bottom: 20px;
     }
     footer.site nav {
       display: flex;
       gap: 20px;
     }
     footer.site a {
-      color: var(--muted);
+      color: var(--plum-soft);
       text-decoration: none;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 500;
     }
-    footer.site a:hover {
-      color: var(--ink);
-    }
+    footer.site a:hover { color: var(--plum); }
     footer.site .copy {
-      color: var(--muted);
+      color: var(--plum-soft);
       font-size: 13px;
-    }
-  </style>
-  <style is:global>
-    * {
-      box-sizing: border-box;
-    }
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #ffffff;
-      color: var(--ink);
-      font-family: 'Inter', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    }
-    h1, h2, h3 {
-      font-family: 'Manrope', 'Inter', -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-    }
-    a {
-      color: inherit;
-    }
-    .wrap {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-    .js-enabled .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .js-enabled .reveal.is-visible {
-      opacity: 1;
-      transform: none;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
-      }
     }
   </style>
 </head>
 <body>
   <header class="site">
     <div class="wrap">
-      <a class="brand" href="/">
-        <img src="/logo.png" alt="LiveFonty" />
-      </a>
+      <a class="brand" href="/">Live<span>Font</span>y</a>
       <nav class="site-nav">
         <a href="/#features">Features</a>
         <a href="/#how-it-works">How it works</a>
         <a href="/#faq">FAQ</a>
-        <a class="nav-cta" href="/#download">Download</a>
+        <a class="nav-cta" href={storeUrl} target="_blank" rel="noopener">Download</a>
       </nav>
     </div>
   </header>
@@ -172,26 +225,5 @@ const { title, description } = Astro.props;
       </nav>
     </div>
   </footer>
-
-  <script>
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const revealEls = document.querySelectorAll('.reveal');
-    if (!prefersReduced && 'IntersectionObserver' in window) {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          for (const entry of entries) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          }
-        },
-        { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
-      );
-      revealEls.forEach((el) => observer.observe(el));
-    } else {
-      revealEls.forEach((el) => el.classList.add('is-visible'));
-    }
-  </script>
 </body>
 </html>

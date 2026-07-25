@@ -5,34 +5,31 @@ const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpn
 
 const features = [
   {
-    emoji: '🔎',
-    title: 'Search All Fonts',
-    body: 'Type to filter the entire Google Fonts catalog, 1,900+ families, and apply any of them to the page you’re viewing in one click.',
+    title: 'Search all fonts',
+    body: 'Type to filter the entire Google Fonts catalog — 1,900+ families — and apply any of them to the page you’re viewing in one click.',
   },
   {
-    emoji: '🎨',
-    title: 'Brand Vibe Picker',
-    body: 'Pick a personality — Modern & Minimal, Bold & Edgy, Elegant & Luxury, and more — and get a curated shortlist of fonts that fit it.',
+    title: 'Brand vibe picker',
+    body: 'Pick a personality — Modern & Minimal, Bold & Edgy, Elegant & Luxury, and more — and get a curated shortlist that fits.',
   },
   {
-    emoji: '📈',
-    title: 'Top 10, Real Data',
-    body: 'A quick-pick list of the 10 most popular fonts, ranked straight from Google Fonts’ own popularity data.',
+    title: 'Top 10, real data',
+    body: 'A quick-pick list of the 10 most popular fonts, ranked from Google Fonts’ own popularity data.',
   },
 ];
 
 const audience = [
   {
     title: 'Designers',
-    body: 'Pressure-test brand typography against real content before it ships to production.',
+    body: 'Pressure-test brand typography against real content before it ships.',
   },
   {
-    title: 'Frontend Developers',
-    body: 'Try font pairings on the live page instead of editing CSS and reloading, over and over.',
+    title: 'Frontend developers',
+    body: 'Try pairings on the live page instead of editing CSS and reloading.',
   },
   {
-    title: 'Creative Artists',
-    body: 'See how type shapes the mood and voice of a page before committing to a direction.',
+    title: 'Creative artists',
+    body: 'See how type shapes mood and voice before committing to a direction.',
   },
 ];
 
@@ -80,28 +77,31 @@ const faqs = [
 ---
 <Layout title="LiveFonty — Live-preview Google Fonts on any website" description="Instantly preview any Google Font on the page you're viewing. Search 1,900+ fonts, browse by brand vibe, or pick from a real-data Top 10.">
   <main>
-    <section class="band band-white">
-      <div class="wrap hero">
-        <div class="pill">Chrome Extension</div>
-        <h1>See your site in a different font before you commit to it.</h1>
-        <p class="lead">
-          LiveFonty previews any Google Font on the webpage you're currently viewing &mdash;
-          instantly, with no code changes. Search the full catalog, browse by brand vibe,
-          or grab one of the real-data Top 10.
+    <section class="hero">
+      <div class="wrap hero-inner">
+        <p class="eyebrow hero-anim">Chrome extension</p>
+        <p class="brand-hero hero-anim">LiveFonty</p>
+        <h1 class="hero-anim">See your site in a different font before you commit.</h1>
+        <p class="lead hero-anim">
+          Preview any Google Font on the page you're viewing — instantly, with no code changes.
         </p>
-        <div class="cta-row">
+        <div class="cta-row hero-anim">
           <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+        </div>
+        <div class="specimen hero-anim" aria-hidden="true">
+          <span class="specimen-aa">Aa</span>
+          <span class="specimen-line">The quick brown fox</span>
         </div>
       </div>
     </section>
 
-    <section class="band band-black reveal">
-      <div class="wrap audience">
+    <section class="section audience" data-animate>
+      <div class="wrap">
         <p class="eyebrow">Who it's for</p>
         <h2>Built for people who obsess over type.</h2>
         <div class="audience-grid">
           {audience.map((a) => (
-            <div class="audience-item">
+            <div class="audience-item" data-animate-child>
               <h3>{a.title}</h3>
               <p>{a.body}</p>
             </div>
@@ -110,30 +110,32 @@ const faqs = [
       </div>
     </section>
 
-    <section id="features" class="band band-white reveal">
+    <section id="features" class="section" data-animate>
       <div class="wrap">
         <p class="eyebrow">Features</p>
         <h2>Everything you need to try a font on for size.</h2>
-        <div class="cards">
-          {features.map((f) => (
-            <div class="card">
-              <div class="card-icon">{f.emoji}</div>
-              <h3>{f.title}</h3>
-              <p>{f.body}</p>
+        <div class="feature-list">
+          {features.map((f, i) => (
+            <div class="feature-row" data-animate-child>
+              <span class="feature-num">{String(i + 1).padStart(2, '0')}</span>
+              <div>
+                <h3>{f.title}</h3>
+                <p>{f.body}</p>
+              </div>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <section id="how-it-works" class="band band-black reveal">
-      <div class="wrap how">
+    <section id="how-it-works" class="section how" data-animate>
+      <div class="wrap">
         <p class="eyebrow">How it works</p>
         <h2>From click to new font in seconds.</h2>
         <div class="how-layout">
           <ol class="how-steps">
             {steps.map((s, i) => (
-              <li>
+              <li data-animate-child>
                 <span class="step-num">{i + 1}</span>
                 <div>
                   <h3>{s.title}</h3>
@@ -142,20 +144,17 @@ const faqs = [
               </li>
             ))}
           </ol>
-          <div class="video-frame">
-            <div class="video-poster">
-              <span class="play-icon-wrap">
-                <span class="play-icon"></span>
-              </span>
-            </div>
-            <p class="video-caption">Full walkthrough video — coming soon</p>
+          <div class="demo-panel" data-animate-child>
+            <p class="demo-label">Live preview</p>
+            <p class="demo-sample">Typography, tested in place.</p>
+            <p class="demo-meta">Full walkthrough video — coming soon</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="band band-white reveal">
-      <div class="wrap suggest">
+    <section class="section suggest" data-animate>
+      <div class="wrap">
         <p class="eyebrow">Roadmap</p>
         <h2>Got an idea for LiveFonty?</h2>
         <p class="lead">We're actively building. Tell us what would make this more useful for you.</p>
@@ -193,13 +192,13 @@ const faqs = [
       </div>
     </section>
 
-    <section id="faq" class="band band-black reveal">
-      <div class="wrap faq">
+    <section id="faq" class="section faq" data-animate>
+      <div class="wrap">
         <p class="eyebrow">FAQ</p>
         <h2>Questions, answered.</h2>
         <div class="faq-list">
           {faqs.map((f) => (
-            <details class="faq-item">
+            <details class="faq-item" data-animate-child>
               <summary>
                 <span>{f.q}</span>
                 <span class="chevron" aria-hidden="true"></span>
@@ -211,8 +210,8 @@ const faqs = [
       </div>
     </section>
 
-    <section id="download" class="band band-white reveal">
-      <div class="wrap cta-bottom">
+    <section id="download" class="section cta-bottom" data-animate>
+      <div class="wrap">
         <h2>See it on your own site.</h2>
         <p>Free, instant, no code changes.</p>
         <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
@@ -241,7 +240,7 @@ const faqs = [
           if (!res.ok) throw new Error('Request failed');
           form.hidden = true;
           successEl?.removeAttribute('hidden');
-        } catch (err) {
+        } catch {
           errorEl?.removeAttribute('hidden');
           if (submitBtn instanceof HTMLButtonElement) submitBtn.disabled = false;
         }
@@ -249,183 +248,207 @@ const faqs = [
     }
   </script>
 
-  <style>
-    .band {
-      padding: 0;
-    }
-    .band-white {
-      background: #ffffff;
-      color: var(--ink);
-    }
-    .band-black {
-      background: var(--ink);
-      color: var(--night-text);
-    }
-    .band-black h2 {
-      color: #ffffff;
-    }
-    .band-black .lead,
-    .band-black p {
-      color: var(--night-muted);
-    }
-    .eyebrow {
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--red);
-      margin: 0 0 10px;
-    }
-    .band-black .eyebrow {
-      color: var(--red-bright);
-    }
+  <script>
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-    /* Hero */
-    .hero {
-      padding-top: 72px;
-      padding-bottom: 48px;
-      text-align: center;
+    gsap.registerPlugin(ScrollTrigger);
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduced) {
+      gsap.from('.hero-anim', {
+        opacity: 0,
+        y: 28,
+        duration: 0.85,
+        stagger: 0.12,
+        ease: 'power3.out',
+        delay: 0.08,
+      });
+
+      gsap.to('.specimen-aa', {
+        y: -10,
+        duration: 3.2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+
+      document.querySelectorAll('[data-animate]').forEach((section) => {
+        const kids = section.querySelectorAll('[data-animate-child]');
+        const targets = kids.length ? kids : [section.querySelector('.wrap') ?? section];
+
+        gsap.from(targets, {
+          opacity: 0,
+          y: 36,
+          duration: 0.7,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 78%',
+            once: true,
+          },
+        });
+      });
     }
-    .pill {
-      display: inline-block;
-      padding: 6px 14px;
-      border-radius: 999px;
-      background: var(--ink);
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      margin-bottom: 20px;
+  </script>
+
+  <style>
+    .hero {
+      padding: 56px 0 28px;
+      min-height: min(88vh, 820px);
+      display: flex;
+      align-items: center;
+    }
+    .hero-inner {
+      text-align: center;
+      position: relative;
+      padding-bottom: 48px;
+    }
+    .brand-hero {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(48px, 10vw, 88px);
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+      margin: 0 0 18px;
+      color: var(--plum);
+      background: linear-gradient(120deg, var(--plum) 20%, #6b4c9a 55%, var(--mustard) 110%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
     h1 {
-      font-weight: 800;
-      font-size: 40px;
+      font-size: clamp(26px, 4.2vw, 38px);
       line-height: 1.2;
-      margin: 0 0 20px;
-      letter-spacing: -0.02em;
-      max-width: 680px;
-      margin-left: auto;
-      margin-right: auto;
+      font-weight: 700;
+      max-width: 620px;
+      margin: 0 auto 16px;
+      color: var(--plum);
     }
     .lead {
-      font-size: 17px;
-      line-height: 1.6;
-      color: var(--muted);
-      max-width: 560px;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--plum-soft);
+      max-width: 480px;
       margin: 0 auto;
     }
-    .hero .cta-row {
-      margin-top: 32px;
+    .cta-row {
+      margin-top: 28px;
     }
-    .cta-primary {
-      display: inline-block;
-      padding: 12px 24px;
-      border-radius: 8px;
-      background: var(--ink);
-      color: #fff;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: opacity 0.15s ease, transform 0.15s ease;
-      border: none;
-      cursor: pointer;
+    .specimen {
+      margin-top: 48px;
+      padding: 36px 24px 40px;
+      border-radius: 18px;
+      background:
+        linear-gradient(145deg, color-mix(in srgb, var(--lilac-deep) 70%, white), color-mix(in srgb, var(--cream) 80%, white));
+      border: 1px solid var(--border);
+      display: grid;
+      gap: 8px;
+      justify-items: center;
     }
-    .cta-primary:hover {
-      opacity: 0.85;
-      transform: translateY(-1px);
+    .specimen-aa {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 16vw, 120px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.06em;
+      color: var(--plum);
+      display: block;
+    }
+    .specimen-line {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 3vw, 28px);
+      font-weight: 500;
+      color: var(--mustard);
+      letter-spacing: -0.02em;
     }
 
-    /* Who it's for */
-    .audience {
-      padding-top: 72px;
-      padding-bottom: 72px;
+    .section {
+      padding: 88px 0;
+    }
+    .section h2 {
+      font-size: clamp(26px, 3.5vw, 34px);
+      margin: 0 0 36px;
+      max-width: 520px;
+    }
+    .audience h2,
+    .suggest h2,
+    .cta-bottom h2,
+    #features h2,
+    .how h2,
+    .faq h2 {
+      text-align: left;
+    }
+    .audience .wrap > h2,
+    #features .wrap > h2,
+    .suggest .wrap > h2,
+    .cta-bottom .wrap > h2 {
+      margin-left: auto;
+      margin-right: auto;
       text-align: center;
     }
-    .audience h2 {
-      font-size: 30px;
-      letter-spacing: -0.02em;
-      margin: 0 0 40px;
+    .audience .eyebrow,
+    #features .eyebrow,
+    .suggest .eyebrow,
+    .cta-bottom .eyebrow {
+      text-align: center;
     }
+
     .audience-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      text-align: left;
-    }
-    .audience-item {
-      border: 1px solid var(--night-border);
-      border-radius: 14px;
-      padding: 24px;
+      gap: 28px 32px;
     }
     .audience-item h3 {
-      font-size: 16px;
+      font-size: 20px;
       margin: 0 0 8px;
-      color: #fff;
     }
     .audience-item p {
-      font-size: 14px;
-      line-height: 1.6;
       margin: 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--plum-soft);
     }
 
-    /* Features */
-    #features {
-      padding: 72px 0;
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--border);
     }
-    #features h2 {
-      font-size: 30px;
-      letter-spacing: -0.02em;
-      margin: 0 0 40px;
-      text-align: center;
-    }
-    .cards {
+    .feature-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: 64px 1fr;
       gap: 20px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
     }
-    .card {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 28px 24px;
-      background: #fff;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.08);
-      border-color: var(--red);
-    }
-    .card-icon {
+    .feature-num {
+      font-family: var(--font-display);
       font-size: 28px;
-      margin-bottom: 14px;
+      font-weight: 700;
+      color: var(--mustard);
+      line-height: 1;
     }
-    .card h3 {
-      font-size: 17px;
+    .feature-row h3 {
+      font-size: 20px;
       margin: 0 0 8px;
-      letter-spacing: -0.01em;
     }
-    .card p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--muted);
+    .feature-row p {
       margin: 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--plum-soft);
+      max-width: 520px;
     }
 
-    /* How it works */
-    .how {
-      padding-top: 72px;
-      padding-bottom: 72px;
-    }
-    .how h2 {
-      font-size: 30px;
-      letter-spacing: -0.02em;
-      margin: 0 0 40px;
-    }
     .how-layout {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 48px;
+      gap: 40px;
       align-items: start;
     }
     .how-steps {
@@ -442,11 +465,11 @@ const faqs = [
     }
     .step-num {
       flex: none;
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
-      border: 1px solid var(--red-bright);
-      color: var(--red-bright);
+      background: var(--plum);
+      color: var(--lemon);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -454,65 +477,51 @@ const faqs = [
       font-size: 14px;
     }
     .how-steps h3 {
-      font-size: 16px;
-      margin: 0 0 4px;
-      color: #fff;
+      font-size: 18px;
+      margin: 0 0 6px;
     }
     .how-steps p {
-      font-size: 14px;
-      line-height: 1.6;
       margin: 0;
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--plum-soft);
     }
-    .video-frame {
-      position: sticky;
-      top: 24px;
-    }
-    .video-poster {
-      aspect-ratio: 16 / 9;
-      background: linear-gradient(135deg, #1a1a1a, #000);
-      border: 1px solid var(--night-border);
-      border-radius: 14px;
+    .demo-panel {
+      border-radius: 16px;
+      padding: 40px 28px;
+      background: linear-gradient(150deg, var(--plum) 0%, #4a2d72 55%, #6b4c9a 100%);
+      color: var(--cream);
+      min-height: 240px;
       display: flex;
-      align-items: center;
+      flex-direction: column;
       justify-content: center;
+      gap: 12px;
     }
-    .play-icon-wrap {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      border: 2px solid var(--red-bright);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.2s ease;
+    .demo-label {
+      margin: 0;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--lemon);
     }
-    .video-frame:hover .play-icon-wrap {
-      transform: scale(1.08);
+    .demo-sample {
+      margin: 0;
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: #fff8ea;
     }
-    .play-icon {
-      width: 0;
-      height: 0;
-      border-top: 12px solid transparent;
-      border-bottom: 12px solid transparent;
-      border-left: 20px solid var(--red-bright);
-      margin-left: 6px;
-    }
-    .video-caption {
-      text-align: center;
+    .demo-meta {
+      margin: 8px 0 0;
       font-size: 13px;
-      margin: 12px 0 0;
+      color: color-mix(in srgb, var(--cream) 70%, transparent);
     }
 
-    /* Suggest */
     .suggest {
-      padding-top: 72px;
-      padding-bottom: 72px;
       text-align: center;
-    }
-    .suggest h2 {
-      font-size: 30px;
-      letter-spacing: -0.02em;
-      margin: 0 0 12px;
     }
     .suggest .lead {
       margin-bottom: 32px;
@@ -534,70 +543,57 @@ const faqs = [
       font-size: 13px;
       font-weight: 600;
       margin-bottom: 6px;
+      color: var(--plum);
     }
     .field-row .optional {
       font-weight: 400;
-      color: var(--muted);
+      color: var(--plum-soft);
     }
     .field-row input,
     .field-row textarea {
       width: 100%;
-      padding: 10px 12px;
+      padding: 12px 14px;
       border-radius: 8px;
       border: 1px solid var(--border);
       font-family: inherit;
       font-size: 14px;
-      color: var(--ink);
-      background: #fff;
+      color: var(--plum);
+      background: color-mix(in srgb, white 70%, var(--lilac));
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .field-row input:focus,
     .field-row textarea:focus {
       outline: none;
-      border-color: var(--red);
-      box-shadow: 0 0 0 3px rgba(126,12,12,0.12);
+      border-color: var(--mustard);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--mustard) 28%, transparent);
     }
-    .field-row textarea {
-      resize: vertical;
-    }
+    .field-row textarea { resize: vertical; }
     #suggest-form .cta-primary {
       width: 100%;
-      text-align: center;
     }
     .form-error {
-      color: var(--red);
+      color: #8b2e4b;
       font-size: 13px;
       margin: 12px 0 0;
     }
     .suggest-success {
-      max-width: 480px;
-      margin: 0 auto;
       text-align: center;
-      padding: 24px;
+      padding: 28px;
       border: 1px solid var(--border);
       border-radius: 12px;
       font-weight: 600;
+      color: var(--plum);
+      background: color-mix(in srgb, var(--lemon) 18%, white);
     }
 
-    /* FAQ */
-    .faq {
-      padding-top: 72px;
-      padding-bottom: 72px;
-    }
-    .faq h2 {
-      font-size: 30px;
-      letter-spacing: -0.02em;
-      margin: 0 0 40px;
-    }
     .faq-list {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .faq-item {
-      border: 1px solid var(--night-border);
-      border-radius: 12px;
-      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      padding: 4px 0 14px;
     }
     .faq-item summary {
       display: flex;
@@ -606,21 +602,19 @@ const faqs = [
       gap: 16px;
       cursor: pointer;
       font-weight: 600;
-      color: #fff;
+      font-size: 15px;
+      color: var(--plum);
       list-style: none;
+      padding: 12px 0;
     }
-    .faq-item summary::-webkit-details-marker {
-      display: none;
-    }
-    .faq-item summary:hover {
-      color: var(--red-bright);
-    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { color: #4a2d72; }
     .faq-item .chevron {
       flex: none;
       width: 10px;
       height: 10px;
-      border-right: 2px solid var(--red-bright);
-      border-bottom: 2px solid var(--red-bright);
+      border-right: 2px solid var(--mustard);
+      border-bottom: 2px solid var(--mustard);
       transform: rotate(45deg);
       transition: transform 0.2s ease;
     }
@@ -628,35 +622,33 @@ const faqs = [
       transform: rotate(-135deg);
     }
     .faq-item p {
-      margin: 14px 0 0;
+      margin: 0 0 8px;
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.65;
+      color: var(--plum-soft);
+      max-width: 640px;
     }
 
-    /* Bottom CTA */
     .cta-bottom {
       text-align: center;
-      padding-top: 56px;
-      padding-bottom: 88px;
+      padding-bottom: 110px;
     }
     .cta-bottom h2 {
-      font-weight: 800;
-      font-size: 28px;
-      letter-spacing: -0.02em;
-      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 36px);
+      margin: 0 0 10px;
     }
     .cta-bottom p {
-      color: var(--muted);
+      color: var(--plum-soft);
       font-size: 15px;
       margin: 0 0 28px;
     }
 
     @media (max-width: 720px) {
-      h1 { font-size: 30px; }
-      .cards { grid-template-columns: 1fr; }
       .audience-grid { grid-template-columns: 1fr; }
       .how-layout { grid-template-columns: 1fr; }
-      .video-frame { position: static; }
+      .feature-row { grid-template-columns: 48px 1fr; gap: 14px; }
+      .hero { min-height: auto; padding-top: 40px; }
+      .section { padding: 64px 0; }
     }
   </style>
 </Layout>
