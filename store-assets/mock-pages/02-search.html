@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Search results</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    
+* { box-sizing: border-box; }
+.lf-popup {
+  width: 260px;
+  padding: 12px;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #09090b;
+  color: #f4f4f5;
+  border-radius: 10px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06);
+}
+.lf-popup .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #27272a;
+}
+.lf-popup .title { font-size: 13px; font-weight: 600; letter-spacing: -0.01em; color: #f4f4f5; }
+.lf-popup .badge {
+  font-size: 10px; color: #a1a1aa; background-color: #18181b;
+  padding: 2px 6px; border-radius: 4px; border: 1px solid #27272a;
+}
+.lf-popup label {
+  display: block; font-size: 11px; font-weight: 500; color: #a1a1aa; margin-bottom: 6px;
+}
+.lf-popup select, .lf-popup input[type="text"] {
+  width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #27272a;
+  background-color: #18181b; color: #f4f4f5; font-size: 13px; outline: none;
+}
+.lf-popup .search-section, .lf-popup .vibe-section, .lf-popup .top10-section { margin-bottom: 14px; }
+.lf-popup .font-results {
+  list-style: none; margin: 8px 0 0; padding: 0; max-height: 150px; overflow: hidden; border-radius: 6px;
+  background: #0c0c0e; border: 1px solid #27272a;
+}
+.lf-popup .font-results li {
+  padding: 6px 10px; font-size: 12px; color: #f4f4f5; border-bottom: 1px solid #18181b;
+}
+.lf-popup .font-results li.active, .lf-popup .font-results li.hover {
+  background-color: #18181b;
+}
+.lf-popup .font-results .hint { padding: 6px 10px; font-size: 11px; color: #71717a; }
+.lf-popup .vibe-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.lf-popup .vibe-btn {
+  padding: 8px 6px; border-radius: 6px; border: 1px solid #27272a;
+  background-color: #18181b; color: #f4f4f5; font-size: 11px; font-weight: 500;
+  text-align: center; line-height: 1.3;
+}
+.lf-popup .vibe-btn.active {
+  background-color: #27272a; border-color: #71717a;
+}
+.lf-popup .status {
+  margin-top: 10px; font-size: 10px; color: #71717a; text-align: center;
+}
+.lf-popup .select-shell { position: relative; }
+.lf-popup .fake-select {
+  width: 100%; padding: 8px 10px; border-radius: 6px; border: 1px solid #52525b;
+  background-color: #18181b; color: #f4f4f5; font-size: 13px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.lf-popup .fake-select .chev { opacity: 0.6; font-size: 10px; }
+.lf-popup .dropdown-menu {
+  margin-top: 4px; border-radius: 6px; border: 1px solid #3f3f46;
+  background: #18181b; overflow: hidden;
+}
+.lf-popup .dropdown-menu div {
+  padding: 7px 10px; font-size: 12px; color: #d4d4d8; border-bottom: 1px solid #27272a;
+}
+.lf-popup .dropdown-menu div.selected {
+  background: #27272a; color: #fff; font-weight: 600;
+}
+
+    html, body { margin: 0; padding: 0; width: 1280px; height: 800px; overflow: hidden; background: #c8ccd4; }
+    body {
+      font-family: Poppins, system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse 80% 50% at 100% -10%, rgba(255,255,255,0.7), transparent 55%),
+        linear-gradient(165deg, #f7f8fa 0%, #eef0f4 45%, #dde1e8 100%);
+    }
+    .frame {
+      width: 1280px; height: 800px; position: relative;
+      padding: 28px 32px 24px;
+      box-sizing: border-box;
+    }
+    .chrome {
+      height: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 24px 60px rgba(42,47,58,0.18);
+      display: flex; flex-direction: column;
+      border: 1px solid rgba(255,255,255,0.9);
+    }
+    .chrome-bar {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 14px; background: #f3f4f6; border-bottom: 1px solid #e5e7eb;
+    }
+    .traffic { display: flex; gap: 6px; }
+    .traffic span { width: 10px; height: 10px; border-radius: 50%; background: #d1d5db; }
+    .traffic span:nth-child(1) { background: #f87171; }
+    .traffic span:nth-child(2) { background: #fbbf24; }
+    .traffic span:nth-child(3) { background: #34d399; }
+    .omnibox {
+      flex: 1; background: #fff; border: 1px solid #e5e7eb; border-radius: 999px;
+      padding: 6px 14px; font-size: 12px; color: #6b7280;
+    }
+    .ext-slot {
+      width: 28px; height: 28px; border-radius: 8px; background: #2a2f3a;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 2px #e8c84a;
+    }
+    .ext-icon { color: #e8c84a; font-size: 11px; font-weight: 700; font-family: Georgia, serif; }
+    .chrome-body { position: relative; flex: 1; overflow: hidden; background: #fafafa; }
+    .site { padding: 36px 48px; color: #18181b; }
+    .site-nav {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 40px; font-size: 14px;
+    }
+    .site-nav nav { display: flex; gap: 22px; color: #52525b; }
+    .eyebrow {
+      text-transform: uppercase; letter-spacing: 0.14em; font-size: 11px;
+      color: #71717a; margin: 0 0 10px;
+    }
+    .site h1 {
+      font-size: 52px; line-height: 1.08; letter-spacing: -0.03em;
+      margin: 0 0 16px; max-width: 640px; font-weight: 700;
+    }
+    .site .body {
+      font-size: 18px; line-height: 1.55; color: #3f3f46;
+      max-width: 520px; margin: 0 0 24px;
+    }
+    .site-cta {
+      border: none; background: #18181b; color: #fff; padding: 12px 20px;
+      border-radius: 999px; font-size: 14px; cursor: default;
+    }
+    .cards {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+      margin-top: 48px;
+    }
+    .cards article {
+      background: #fff; border: 1px solid #e4e4e7; border-radius: 14px; padding: 18px;
+    }
+    .cards h3 { margin: 0 0 8px; font-size: 18px; }
+    .cards p { margin: 0; font-size: 14px; color: #52525b; line-height: 1.5; }
+    .popup-wrap {
+      position: absolute; top: 12px; right: 18px; z-index: 20;
+    }
+    .font-chip {
+      position: absolute; left: 48px; bottom: 28px; z-index: 5;
+      background: rgba(9,9,11,0.92); color: #f4f4f5; border: 1px solid #27272a;
+      border-radius: 999px; padding: 8px 14px; font-size: 12px;
+      font-family: Poppins, system-ui, sans-serif;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .font-chip strong { color: #e8c84a; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    
+  <div class="chrome">
+    <div class="chrome-bar">
+      <div class="traffic"><span></span><span></span><span></span></div>
+      <div class="omnibox">https://example-shop.com</div>
+      <div class="ext-slot" title="LiveFonty">
+        <div class="ext-icon">Aa</div>
+      </div>
+    </div>
+    <div class="chrome-body">
+      
+      
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    .site * { font-family: 'Playfair Display', sans-serif !important; }
+  </style>
+  <div class="site">
+    <header class="site-nav">
+      <strong>Northline Co.</strong>
+      <nav><span>Shop</span><span>About</span><span>Contact</span></nav>
+    </header>
+    <main>
+      <p class="eyebrow">New season</p>
+      <h1>Design that feels personal.</h1>
+      <p class="body">Preview any Google Font on the live page — this headline is running <em>Playfair Display</em> right now.</p>
+      <button class="site-cta">Shop the collection</button>
+      <div class="cards">
+        <article><h3>Editorial</h3><p>Quiet layouts with strong type hierarchy.</p></article>
+        <article><h3>Product</h3><p>Clean UI copy that stays readable at every size.</p></article>
+        <article><h3>Brand</h3><p>Test voice before you commit to a font family.</p></article>
+      </div>
+    </main>
+  </div>
+      <div class="font-chip">LiveFonty applied · <strong>Playfair Display</strong></div>
+      <div class="popup-wrap">
+  <div class="lf-popup">
+    <div class="header"><span class="title">LiveFonty</span><span class="badge">v1.0</span></div>
+    <div class="search-section">
+      <label>Search All Fonts</label>
+      <input type="text" value="play" readonly>
+      <ul class="font-results">
+        <li class="active">Playfair Display</li>
+        <li>Playwrite US Trad</li>
+        <li>Playpen Sans</li>
+        <li>Player Display</li>
+      </ul>
+    </div>
+    <div class="vibe-section">
+      <label>Brand Vibe</label>
+      <div class="vibe-grid">
+        <button class="vibe-btn">Modern &amp; Minimal</button>
+        <button class="vibe-btn">Bold &amp; Edgy</button>
+        <button class="vibe-btn">Elegant &amp; Luxury</button>
+        <button class="vibe-btn">Playful &amp; Fun</button>
+      </div>
+    </div>
+    <div class="top10-section">
+      <label>Top 10</label>
+      <div class="fake-select"><span>Choose a font...</span><span class="chev">▾</span></div>
+    </div>
+    <div class="status">Live preview enabled · Playfair Display</div>
+  </div></div>
+    
+    </div>
+  </div>
+  </div>
+</body>
+</html>
