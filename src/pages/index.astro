@@ -8,12 +8,12 @@ const githubUrl = 'https://github.com/abdalla980/LiveFonty';
 const supportActions = [
   {
     title: 'Leave a 5 star review',
-    body: 'Already using it? Tap five stars below — we’ll take you to the Chrome Web Store to finish the rating.',
+    body: 'Already using it? A quick 5 star rating on the Chrome Web Store helps others decide.',
     href: reviewUrl,
     label: 'Leave a 5 star review',
     ga: 'review',
     place: 'support',
-    style: 'review',
+    style: 'secondary',
   },
   {
     title: 'Star on GitHub',
@@ -267,42 +267,21 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       <div class="wrap">
         <p class="eyebrow">Next steps</p>
         <h2>Liked LiveFonty? Help it grow.</h2>
-        <p class="lead center">Download stays in the header — here you can rate it or star the project.</p>
         <div class="support-grid support-grid-two">
           {supportActions.map((a) => (
             <article class="glass-card support-card" data-animate-child>
               <h3>{a.title}</h3>
               <p>{a.body}</p>
-              {a.style === 'review' ? (
-                <div class="star-rate" role="group" aria-label="Leave a 5 star review on the Chrome Web Store">
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <a
-                      class="star-rate-btn"
-                      href={a.href}
-                      target="_blank"
-                      rel="noopener"
-                      data-ga={a.ga}
-                      data-ga-place={a.place}
-                      data-stars={n}
-                      aria-label={`Rate ${n} star${n === 1 ? '' : 's'} on the Chrome Web Store`}
-                      title="Opens Chrome Web Store to leave your rating"
-                    >
-                      <span class="star-icon" aria-hidden="true"></span>
-                    </a>
-                  ))}
-                </div>
-              ) : (
-                <a
-                  class="cta-github"
-                  href={a.href}
-                  target="_blank"
-                  rel="noopener"
-                  data-ga={a.ga}
-                  data-ga-place={a.place}
-                >
-                  {a.label}
-                </a>
-              )}
+              <a
+                class={a.style === 'github' ? 'cta-github' : 'cta-secondary'}
+                href={a.href}
+                target="_blank"
+                rel="noopener"
+                data-ga={a.ga}
+                data-ga-place={a.place}
+              >
+                {a.label}
+              </a>
             </article>
           ))}
         </div>
@@ -957,43 +936,32 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       margin: 0 0 20px;
     }
 
+    .support-card .cta-secondary,
     .support-card .cta-github {
       align-self: flex-start;
       width: auto;
     }
 
-    .star-rate {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .star-rate-btn {
+    .cta-secondary {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.65);
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: transparent;
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 14px;
+      font-weight: 500;
       text-decoration: none;
-      transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
-    .star-rate-btn:hover,
-    .star-rate:hover .star-rate-btn {
+    .cta-secondary:hover {
       transform: translateY(-2px);
-      border-color: color-mix(in srgb, var(--mustard) 55%, transparent);
-      background: color-mix(in srgb, var(--lemon) 28%, white);
-    }
-
-    .star-icon {
-      width: 22px;
-      height: 22px;
-      background: var(--mustard);
-      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z'/%3E%3C/svg%3E") center / contain no-repeat;
-      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 2.5l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 17.8 6.2 20.4l1.1-6.5L2.6 9.3l6.5-.9L12 2.5z'/%3E%3C/svg%3E") center / contain no-repeat;
+      border-color: color-mix(in srgb, var(--ink) 28%, transparent);
+      background: rgba(255, 255, 255, 0.55);
     }
 
     .cta-github {
