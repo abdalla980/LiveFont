@@ -1,3 +1,22 @@
 [build]
   command = "npm run build"
   publish = "dist"
+
+[[redirects]]
+  from = "https://livefont.netlify.app/*"
+  to = "https://livefonty.de/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://livefont.netlify.app/*"
+  to = "https://livefonty.de/:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "SAMEORIGIN"

@@ -1,6 +1,62 @@
 ---
 const { title, description } = Astro.props;
-const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpnhdmdncdenhj?utm_source=item-share-cb';
+const storeUrl = 'https://chromewebstore.google.com/detail/livefonty/ahdfmlobklcldcjfapjpnhdmdncdenhj?utm_source=item-share-cb';
+const siteUrl = Astro.site ?? new URL('https://livefonty.de');
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+const ogImage = new URL('/icon.png', siteUrl).href;
+const isHome = Astro.url.pathname === '/' || Astro.url.pathname === '';
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'LiveFonty',
+  url: siteUrl.href,
+  description:
+    'LiveFonty is a Chrome extension that live-previews Google Fonts on any webpage.',
+  publisher: {
+    '@type': 'Organization',
+    name: 'LiveFonty',
+    url: siteUrl.href,
+    email: 'abdullahizzldin1@gmail.com',
+  },
+};
+
+const softwareSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: 'LiveFonty',
+  applicationCategory: 'BrowserApplication',
+  operatingSystem: 'Chrome',
+  url: siteUrl.href,
+  downloadUrl: storeUrl,
+  installUrl: storeUrl,
+  image: ogImage,
+  description:
+    'Instantly preview any Google Font on the page you are viewing. Search 1,900+ fonts, browse by brand vibe, or pick from a real-data Top 10.',
+  offers: {
+    '@type': 'Offer',
+    price: '0',
+    priceCurrency: 'EUR',
+  },
+  author: {
+    '@type': 'Person',
+    name: 'Abdalla Izzeldin',
+    email: 'abdullahizzldin1@gmail.com',
+  },
+};
+
+const webPageSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: title,
+  description,
+  url: canonicalURL.href,
+  isPartOf: {
+    '@type': 'WebSite',
+    name: 'LiveFonty',
+    url: siteUrl.href,
+  },
+};
 ---
 <!doctype html>
 <html lang="en">
@@ -9,10 +65,32 @@ const storeUrl = 'https://chromewebstore.google.com/detail/ahdfmlobklcldcjfapjpn
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{title}</title>
   <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalURL.href} />
   <link rel="icon" href="/icon.png" />
+
+  <meta property="og:type" content={isHome ? 'website' : 'article'} />
+  <meta property="og:site_name" content="LiveFonty" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalURL.href} />
+  <meta property="og:image" content={ogImage} />
+  <meta property="og:locale" content="en_US" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={ogImage} />
+
+  <meta name="theme-color" content="#eef0f4" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(softwareSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+
   <script is:inline>document.documentElement.classList.add('js-enabled');</script>
   <!-- Google Analytics 4 (Consent Mode v2 — loads after Accept in EU) -->
   <script is:inline>

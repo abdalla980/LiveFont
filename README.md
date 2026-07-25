@@ -2,7 +2,7 @@
 
 Marketing site for **[LiveFonty](https://chromewebstore.google.com/detail/livefonty/ahdfmlobklcldcjfapjpnhdmdncdenhj)** — a Chrome extension that live-previews Google Fonts on any webpage.
 
-**Live site:** [https://livefont.netlify.app](https://livefont.netlify.app)  
+**Live site:** [https://livefonty.de](https://livefonty.de)  
 **Extension:** [Chrome Web Store](https://chromewebstore.google.com/detail/livefonty/ahdfmlobklcldcjfapjpnhdmdncdenhj)  
 **Repo:** [github.com/abdalla980/LiveFonty](https://github.com/abdalla980/LiveFonty)
 
@@ -25,7 +25,8 @@ Marketing site for **[LiveFonty](https://chromewebstore.google.com/detail/livefo
 | --- | --- |
 | Framework | [Astro](https://astro.build) 5 |
 | Motion | [GSAP](https://gsap.com) + ScrollTrigger |
-| Hosting | [Netlify](https://www.netlify.com) (`netlify.toml`) |
+| Hosting | [Netlify](https://www.netlify.com) → **https://livefonty.de** |
+| SEO | Canonical + Open Graph + JSON-LD + `@astrojs/sitemap` |
 | Fonts | Poppins (Google Fonts) |
 | Analytics | Google Analytics 4 + Consent Mode v2 |
 
@@ -85,12 +86,13 @@ netlify.toml              # build + publish config
 
 ## Deploy
 
-Pushes to `main` build on Netlify:
+Pushes to `main` build on Netlify (custom domain **https://livefonty.de**):
 
 - **Build command:** `npm run build`
 - **Publish directory:** `dist`
+- **Astro `site`:** `https://livefonty.de` (canonical URLs, sitemap, Open Graph)
 
-Set the Netlify site URL / custom domain in the Netlify dashboard if you change hosts.
+Point the Netlify domain / DNS to `livefonty.de` in the Netlify dashboard if it is not already connected.
 
 ---
 
