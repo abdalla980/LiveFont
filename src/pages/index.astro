@@ -90,7 +90,7 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
             Drop any Google Font onto the site you’re viewing. No code, no reload, no guesswork.
           </p>
           <div class="cta-row hero-anim">
-            <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+            <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener" data-ga="download" data-ga-place="hero">Download for Chrome</a>
           </div>
         </div>
 
@@ -245,7 +245,7 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
         <div class="cta-panel glass-card" data-animate-child>
           <h2>See it on your own site.</h2>
           <p>Free, instant, no code changes.</p>
-          <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+          <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener" data-ga="download" data-ga-place="footer">Download for Chrome</a>
         </div>
       </div>
     </section>
@@ -272,6 +272,12 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
           if (!res.ok) throw new Error('Request failed');
           form.hidden = true;
           successEl?.removeAttribute('hidden');
+          if (typeof gtag === 'function') {
+            gtag('event', 'generate_lead', {
+              event_category: 'engagement',
+              event_label: 'feature_suggestion',
+            });
+          }
         } catch {
           errorEl?.removeAttribute('hidden');
           if (submitBtn instanceof HTMLButtonElement) submitBtn.disabled = false;
