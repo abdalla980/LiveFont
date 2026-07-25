@@ -21,7 +21,7 @@ const features = [
 const audience = [
   {
     title: 'Designers',
-    body: 'Pressure-test brand typography against real content before it ships.',
+    body: 'Pressure-test brand fonts against real content before it ships.',
   },
   {
     title: 'Frontend developers',
@@ -29,7 +29,7 @@ const audience = [
   },
   {
     title: 'Creative artists',
-    body: 'See how type shapes mood and voice before committing to a direction.',
+    body: 'See how fonts shape mood and voice before committing to a direction.',
   },
 ];
 
@@ -83,7 +83,7 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       <div class="hero-sheen" aria-hidden="true"></div>
       <div class="wrap hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow hero-anim">Chrome extension · type lab</p>
+          <p class="eyebrow hero-anim">Chrome extension</p>
           <p class="brand-hero hero-anim">LiveFonty</p>
           <h1 class="hero-anim">Preview fonts on the real page — before you commit.</h1>
           <p class="lead hero-anim">
@@ -103,7 +103,7 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
           </div>
           <div class="lab-stage">
             <p class="lab-label" id="lab-font-name">Playfair Display</p>
-            <p class="lab-sample" id="lab-sample">Typography, tested in place.</p>
+            <p class="lab-sample" id="lab-sample">Fonts, tested in place.</p>
             <div class="lab-bar">
               <span class="lab-pill">Weight 500</span>
               <span class="lab-pill">Live tab</span>
@@ -124,7 +124,7 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
     <section class="section audience" data-animate>
       <div class="wrap">
         <p class="eyebrow">Who it's for</p>
-        <h2>Built for people who obsess over type.</h2>
+        <h2>Built for people who obsess over fonts.</h2>
         <div class="card-grid">
           {audience.map((a) => (
             <article class="glass-card" data-animate-child>
@@ -170,7 +170,7 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
           </ol>
           <div class="demo-panel glass-card" data-animate-child>
             <p class="demo-label">Live preview</p>
-            <p class="demo-sample">Swap type. Keep the page.</p>
+            <p class="demo-sample">Swap fonts. Keep the page.</p>
             <p class="demo-meta">Full walkthrough video — coming soon</p>
           </div>
         </div>
@@ -180,7 +180,7 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
     <section class="section suggest" data-animate>
       <div class="wrap">
         <p class="eyebrow">Roadmap</p>
-        <h2>Got an idea for LiveFonty?</h2>
+        <h2>Got a suggestion for LiveFonty?</h2>
         <p class="lead center">We're actively building. Tell us what would make this more useful for you.</p>
         <div class="suggest-panel glass-card" data-animate-child>
           <form
@@ -203,7 +203,7 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
               <input id="email" name="email" type="email" autocomplete="email" />
             </div>
             <div class="field-row">
-              <label for="suggestion">Your idea</label>
+              <label for="suggestion">Your suggestion</label>
               <textarea id="suggestion" name="suggestion" rows="4" required></textarea>
             </div>
             <button type="submit" class="cta-primary">Send suggestion</button>
@@ -236,10 +236,17 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
 
     <section id="download" class="section cta-bottom" data-animate>
       <div class="wrap">
-        <div class="cta-panel glass-card" data-animate-child>
-          <h2>See it on your own site.</h2>
-          <p>Free, instant, no code changes.</p>
-          <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+        <div class="cta-stage" data-animate-child>
+          <div class="cta-paint" aria-hidden="true">
+            <span class="paint-blob paint-a"></span>
+            <span class="paint-blob paint-b"></span>
+            <span class="paint-blob paint-c"></span>
+          </div>
+          <div class="cta-panel glass-card">
+            <h2>See it on your own site.</h2>
+            <p>Free, instant, no code changes.</p>
+            <a class="cta-primary" href={storeUrl} target="_blank" rel="noopener">Download for Chrome</a>
+          </div>
         </div>
       </div>
     </section>
@@ -283,8 +290,8 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     const samples = [
-      { name: 'Playfair Display', text: 'Typography, tested in place.', weight: '500' },
-      { name: 'Space Grotesk', text: 'See the page. Change the type.', weight: '400' },
+      { name: 'Playfair Display', text: 'Fonts, tested in place.', weight: '500' },
+      { name: 'Space Grotesk', text: 'See the page. Change the font.', weight: '400' },
       { name: 'Cormorant Garamond', text: 'Commit after you feel it.', weight: '500' },
       { name: 'Syne', text: '1,900+ fonts. One click.', weight: '600' },
     ];
@@ -343,6 +350,30 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
           cycleLab();
           gsap.delayedCall(3.2, loop);
         });
+      });
+
+      gsap.to('.paint-a', {
+        x: 18,
+        y: -12,
+        duration: 5.5,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+      gsap.to('.paint-b', {
+        x: -14,
+        y: 16,
+        duration: 6.2,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+      gsap.to('.paint-c', {
+        scale: 1.15,
+        duration: 4.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
       });
 
       document.querySelectorAll('.glass-card').forEach((card) => {
@@ -826,10 +857,66 @@ const marqueeFonts = ['Inter', 'Playfair', 'Space Grotesk', 'Cormorant', 'DM San
       padding-bottom: 110px;
     }
 
-    .cta-panel {
-      padding: 48px 32px;
-      max-width: 640px;
+    .cta-stage {
+      position: relative;
+      max-width: 680px;
       margin: 0 auto;
+      padding: 28px;
+    }
+
+    .cta-paint {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      filter: blur(2px);
+    }
+
+    .paint-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(28px);
+      opacity: 0.85;
+    }
+
+    .paint-a {
+      width: 220px;
+      height: 220px;
+      top: -20px;
+      left: 8%;
+      background: radial-gradient(circle at 35% 35%, #9b6dff 0%, #5b2d9e 45%, transparent 70%);
+    }
+
+    .paint-b {
+      width: 180px;
+      height: 180px;
+      bottom: -10px;
+      right: 6%;
+      background: radial-gradient(circle at 40% 40%, #c9a0ff 0%, #6b3fa0 50%, transparent 72%);
+    }
+
+    .paint-c {
+      width: 140px;
+      height: 140px;
+      top: 35%;
+      left: 55%;
+      background: radial-gradient(circle at 50% 50%, rgba(232, 200, 74, 0.55) 0%, rgba(155, 109, 255, 0.35) 40%, transparent 70%);
+    }
+
+    .cta-panel {
+      position: relative;
+      z-index: 1;
+      padding: 48px 32px;
+      max-width: none;
+      margin: 0;
+      border: 1.5px solid rgba(107, 63, 160, 0.45);
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.85) inset,
+        0 0 0 1px rgba(155, 109, 255, 0.12),
+        0 18px 40px rgba(74, 53, 104, 0.14),
+        0 0 60px rgba(107, 63, 160, 0.12);
+      background: linear-gradient(155deg, rgba(255,255,255,0.78), rgba(238,240,244,0.5));
+      backdrop-filter: blur(18px) saturate(1.15);
     }
 
     .cta-panel h2 {
