@@ -32,7 +32,7 @@ const softwareSchema = {
   installUrl: storeUrl,
   image: ogImage,
   description:
-    'Instantly preview any Google Font on the page you are viewing. Search 1,900+ fonts, browse by brand vibe, or pick from a real-data Top 10.',
+    'Search 1,900+ Google Fonts and preview them live on any webpage. Free to install, no signup. Fonts apply in your browser only.',
   offers: {
     '@type': 'Offer',
     price: '0',
@@ -66,7 +66,11 @@ const webPageSchema = {
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalURL.href} />
-  <link rel="icon" href="/icon.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
   <meta property="og:type" content={isHome ? 'website' : 'article'} />
   <meta property="og:site_name" content="LiveFonty" />
