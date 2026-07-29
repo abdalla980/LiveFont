@@ -5,7 +5,7 @@ Marketing site for **[LiveFonty](https://chromewebstore.google.com/detail/livefo
 **Live site:** [https://livefonty.de](https://livefonty.de)  
 **Extension:** [Chrome Web Store](https://chromewebstore.google.com/detail/livefonty/ahdfmlobklcldcjfapjpnhdmdncdenhj)  
 **Repo:** [github.com/abdalla980/LiveFonty](https://github.com/abdalla980/LiveFonty)
-
+**Web.to** [Web.to](https://dev.to/abdalla980/why-i-built-livefonty-preview-google-fonts-live-on-any-webpage-5f24)
 ---
 
 ## What’s on the page
